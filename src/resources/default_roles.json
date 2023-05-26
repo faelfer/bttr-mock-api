@@ -1,0 +1,38 @@
+[
+  {
+    "id": 626905682,
+    "name": "Chefe de Tecnologia",
+    "area": {
+      "id": 3,
+      "name": "Desenvolvimento",
+      "created": "2023-01-03T12:00:00.231Z"
+    }
+  },
+  {
+    "id": 333461581,
+    "name": "Chefe do Financeiro",
+    "area": {
+      "id": 2,
+      "name": "Financeiro",
+      "created": "2023-01-02T12:00:00.231Z"
+    }
+  },
+  {
+    "id": 479296508,
+    "name": "Chefe do Administrativo",
+    "area": {
+      "id": 1,
+      "name": "Administração",
+      "created": "2023-01-01T12:00:00.231Z"
+    }
+  },
+  {
+    "id": 187924386,
+    "name": "Vendedor",
+    "area": {
+      "id": 4,
+      "name": "Vendas",
+      "created": "2023-01-04T12:00:00.231Z"
+    }
+  }
+]

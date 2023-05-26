@@ -1,0 +1,182 @@
+[
+  {
+    "name": "Indicador 4Teste",
+    "unit_measurement": "QUANTIDADE",
+    "goals": [
+      {
+        "goal": "4000",
+        "start_date": "2023-04-01T03:00:00.000Z",
+        "end_date": "2023-04-30T03:00:00.000Z"
+      }
+    ],
+    "criterion": "MENOR QUE",
+    "responsible": {
+      "first_name": "Membro",
+      "last_name": "4Teste",
+      "email": "membro4@yahoo.com",
+      "area": {
+        "id": 1,
+        "name": "Administração",
+        "created": "2023-01-01T12:00:00.231Z"
+      },
+      "role": {
+        "id": 479296508,
+        "name": "Chefe do Administrativo",
+        "area": {
+          "id": 1,
+          "name": "Administração",
+          "created": "2023-01-01T12:00:00.231Z"
+        }
+      },
+      "password": "4",
+      "token": "Token 714246b6-68ff-43db-bb7d-171f8050d257",
+      "id": 4,
+      "user_type": "default_user",
+      "profile_picture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/348.jpg",
+      "created": "2023-01-04T12:00:00.231Z"
+    },
+    "area": {
+      "id": 4,
+      "name": "Vendas",
+      "created": "2023-01-04T12:00:00.231Z"
+    },
+    "id": 953322923,
+    "parent": null,
+    "created": "2023-01-04T03:25:09.436Z"
+  },
+  {
+    "name": "Indicador 3Teste",
+    "unit_measurement": "R$",
+    "goals": [
+      {
+        "goal": "3000",
+        "start_date": "2023-03-01T03:00:00.000Z",
+        "end_date": "2023-03-31T03:00:00.000Z"
+      }
+    ],
+    "criterion": "MAIOR QUE",
+    "responsible": {
+      "first_name": "Membro",
+      "last_name": "3Teste",
+      "email": "membro3@yahoo.com",
+      "area": {
+        "id": 1,
+        "name": "Administração",
+        "created": "2023-01-01T12:00:00.231Z"
+      },
+      "role": {
+        "id": 479296508,
+        "name": "Chefe do Administrativo",
+        "area": {
+          "id": 1,
+          "name": "Administração",
+          "created": "2023-01-01T12:00:00.231Z"
+        }
+      },
+      "password": "3",
+      "token": "Token 714246b6-68ff-43db-bb7d-171f8050d257",
+      "id": 3,
+      "user_type": "default_user",
+      "profile_picture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/489.jpg",
+      "created": "2023-01-03T12:00:00.231Z"
+    },
+    "area": {
+      "id": 3,
+      "name": "Desenvolvimento",
+      "created": "2023-01-03T12:00:00.231Z"
+    },
+    "id": 181368896,
+    "parent": null,
+    "created": "2023-01-03T03:24:33.042Z"
+  },
+  {
+    "name": "Indicador 2Teste",
+    "unit_measurement": "DIAS",
+    "goals": [
+      {
+        "goal": "2000",
+        "start_date": "2023-02-01T03:00:00.000Z",
+        "end_date": "2023-02-28T03:00:00.000Z"
+      }
+    ],
+    "criterion": "MENOR QUE",
+    "responsible": {
+      "first_name": "Membro",
+      "last_name": "2Teste",
+      "email": "membro2@yahoo.com",
+      "area": {
+        "id": 1,
+        "name": "Administração",
+        "created": "2023-01-01T12:00:00.231Z"
+      },
+      "role": {
+        "id": 479296508,
+        "name": "Chefe do Administrativo",
+        "area": {
+          "id": 1,
+          "name": "Administração",
+          "created": "2023-01-01T12:00:00.231Z"
+        }
+      },
+      "password": "2",
+      "token": "Token 714246b6-68ff-43db-bb7d-171f8050d257",
+      "id": 2,
+      "user_type": "default_user",
+      "profile_picture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/922.jpg",
+      "created": "2023-01-02T12:00:00.231Z"
+    },
+    "area": {
+      "id": 2,
+      "name": "Financeiro",
+      "created": "2023-01-02T12:00:00.231Z"
+    },
+    "id": 394116642,
+    "parent": null,
+    "created": "2023-01-02T03:23:55.364Z"
+  },
+  {
+    "name": "Indicador 1Teste",
+    "unit_measurement": "%",
+    "goals": [
+      {
+        "goal": "1000",
+        "start_date": "2023-01-01T03:00:00.000Z",
+        "end_date": "2023-01-31T03:00:00.000Z"
+      }
+    ],
+    "criterion": "MAIOR QUE",
+    "responsible": {
+      "first_name": "Membro",
+      "last_name": "1Teste",
+      "email": "membro1@yahoo.com",
+      "area": {
+        "id": 1,
+        "name": "Administração",
+        "created": "2023-01-01T12:00:00.231Z"
+      },
+      "role": {
+        "id": 479296508,
+        "name": "Chefe do Administrativo",
+        "area": {
+          "id": 1,
+          "name": "Administração",
+          "created": "2023-01-01T12:00:00.231Z"
+        }
+      },
+      "password": "1",
+      "token": "Token 714246b6-68ff-43db-bb7d-171f8050d257",
+      "id": 1,
+      "user_type": "default_user",
+      "profile_picture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/280.jpg",
+      "created": "2023-01-01T11:00:00.231Z"
+    },
+    "area": {
+      "id": 1,
+      "name": "Administração",
+      "created": "2023-01-01T12:00:00.231Z"
+    },
+    "id": 890494608,
+    "parent": null,
+    "created": "2023-01-01T03:23:06.646Z"
+  }
+]

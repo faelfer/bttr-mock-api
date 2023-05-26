@@ -1,0 +1,64 @@
+[
+  {
+    "id": 2,
+    "message": "Segunda notificação do sistema!",
+    "user": {
+      "id": 123456789,
+      "token": "Token cacb3ee25847880bec3d6f4c1d292f282b77c76c",
+      "username": "rafael",
+      "first_name": "Pedro",
+      "last_name": "Lima",
+      "email": "pedro.lima@deway.com.br",
+      "user_type": "manager",
+      "area": {
+        "id": 8,
+        "name": "Operacional",
+        "created": "2023-01-08T12:00:00.231Z"
+      },
+      "role": {
+        "id": 700711066,
+        "name": "Chefe de Operações",
+        "area": {
+          "id": 8,
+          "name": "Operacional",
+          "created": "2023-01-08T12:00:00.231Z"
+        }
+      },
+      "password": "12345678",
+      "profile_picture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/400.jpg",
+      "created": "2023-01-01T10:00:00.231Z"
+    },
+    "created": "2023-01-02T12:00:00.231Z"
+  },
+  {
+    "id": 1,
+    "message": "Primeira notificação do sistema!",
+    "user": {
+      "id": 123456789,
+      "token": "Token cacb3ee25847880bec3d6f4c1d292f282b77c76c",
+      "username": "rafael",
+      "first_name": "Pedro",
+      "last_name": "Lima",
+      "email": "pedro.lima@deway.com.br",
+      "user_type": "manager",
+      "area": {
+        "id": 8,
+        "name": "Operacional",
+        "created": "2023-01-08T12:00:00.231Z"
+      },
+      "role": {
+        "id": 700711066,
+        "name": "Chefe de Operações",
+        "area": {
+          "id": 8,
+          "name": "Operacional",
+          "created": "2023-01-08T12:00:00.231Z"
+        }
+      },
+      "password": "12345678",
+      "profile_picture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/400.jpg",
+      "created": "2023-01-01T10:00:00.231Z"
+    },
+    "created": "2023-01-01T12:00:00.231Z"
+  }
+]

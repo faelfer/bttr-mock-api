@@ -1,0 +1,28 @@
+{
+  "name": "usibras-mock-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node server.js",
+    "database-clean": "node clean_datebase.js",
+    "lint": "yarn run eslint controllers/** utils/** server.js",
+    "lint-fix": "yarn run eslint controllers/** utils/** server.js --fix",
+    "package-clean": "rm -rf node_modules yarn.lock && yarn install",
+    "commit-version": "git add CHANGELOG.md package.json && git commit -m 'update CHANGELOG and number version'"
+  },
+  "dependencies": {
+    "convert-excel-to-json": "^1.7.0",
+    "json-server": "^0.17.1",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.8.0",
+    "pdfkit": "^0.13.0",
+    "trendline": "^0.3.1"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
+    "eslint": "^7.32.0 || ^8.2.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.2"
+  }
+}

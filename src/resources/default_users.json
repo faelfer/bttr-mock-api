@@ -1,0 +1,428 @@
+[
+  {
+    "id": 123456789,
+    "token": "Token cacb3ee25847880bec3d6f4c1d292f282b77c76c",
+    "username": "rafael",
+    "first_name": "Pedro",
+    "last_name": "Lima",
+    "email": "pedro.lima@deway.com.br",
+    "user_type": "manager",
+    "area": {
+      "id": 1,
+      "name": "Administração",
+      "created": "2023-01-01T12:00:00.231Z"
+    },
+    "role": {
+      "id": 479296508,
+      "name": "Chefe do Administrativo",
+      "area": {
+        "id": 1,
+        "name": "Administração",
+        "created": "2023-01-01T12:00:00.231Z"
+      }
+    },
+    "password": "12345678",
+    "profile_picture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/400.jpg",
+    "created": "2023-01-01T10:00:00.231Z"
+  },
+  {
+    "first_name": "Membro",
+    "last_name": "1Teste",
+    "email": "membro1@yahoo.com",
+    "area": {
+      "id": 1,
+      "name": "Administração",
+      "created": "2023-01-01T12:00:00.231Z"
+    },
+    "role": {
+      "id": 479296508,
+      "name": "Chefe do Administrativo",
+      "area": {
+        "id": 1,
+        "name": "Administração",
+        "created": "2023-01-01T12:00:00.231Z"
+      }
+    },
+    "password": "1",
+    "token": "Token 714246b6-68ff-43db-bb7d-171f8050d257",
+    "id": 1,
+    "user_type": "default_user",
+    "profile_picture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/280.jpg",
+    "created": "2023-01-01T11:00:00.231Z"
+  },
+  {
+    "first_name": "Membro",
+    "last_name": "2Teste",
+    "email": "membro2@yahoo.com",
+    "area": {
+      "id": 1,
+      "name": "Administração",
+      "created": "2023-01-01T12:00:00.231Z"
+    },
+    "role": {
+      "id": 479296508,
+      "name": "Chefe do Administrativo",
+      "area": {
+        "id": 1,
+        "name": "Administração",
+        "created": "2023-01-01T12:00:00.231Z"
+      }
+    },
+    "password": "2",
+    "token": "Token 714246b6-68ff-43db-bb7d-171f8050d257",
+    "id": 2,
+    "user_type": "default_user",
+    "profile_picture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/922.jpg",
+    "created": "2023-01-02T12:00:00.231Z"
+  },
+  {
+    "first_name": "Membro",
+    "last_name": "3Teste",
+    "email": "membro3@yahoo.com",
+    "area": {
+      "id": 1,
+      "name": "Administração",
+      "created": "2023-01-01T12:00:00.231Z"
+    },
+    "role": {
+      "id": 479296508,
+      "name": "Chefe do Administrativo",
+      "area": {
+        "id": 1,
+        "name": "Administração",
+        "created": "2023-01-01T12:00:00.231Z"
+      }
+    },
+    "password": "3",
+    "token": "Token 714246b6-68ff-43db-bb7d-171f8050d257",
+    "id": 3,
+    "user_type": "default_user",
+    "profile_picture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/489.jpg",
+    "created": "2023-01-03T12:00:00.231Z"
+  },
+  {
+    "first_name": "Membro",
+    "last_name": "4Teste",
+    "email": "membro4@yahoo.com",
+    "area": {
+      "id": 1,
+      "name": "Administração",
+      "created": "2023-01-01T12:00:00.231Z"
+    },
+    "role": {
+      "id": 479296508,
+      "name": "Chefe do Administrativo",
+      "area": {
+        "id": 1,
+        "name": "Administração",
+        "created": "2023-01-01T12:00:00.231Z"
+      }
+    },
+    "password": "4",
+    "token": "Token 714246b6-68ff-43db-bb7d-171f8050d257",
+    "id": 4,
+    "user_type": "default_user",
+    "profile_picture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/348.jpg",
+    "created": "2023-01-04T12:00:00.231Z"
+  },
+  {
+    "first_name": "Membro",
+    "last_name": "5Teste",
+    "email": "membro5@yahoo.com",
+    "area": {
+      "id": 2,
+      "name": "Financeiro",
+      "created": "2023-01-02T12:00:00.231Z"
+    },
+    "role": {
+      "id": 333461581,
+      "name": "Chefe do Financeiro",
+      "area": {
+        "id": 2,
+        "name": "Financeiro",
+        "created": "2023-01-02T12:00:00.231Z"
+      }
+    },
+    "password": "5",
+    "token": "Token 716fd25a-6708-416e-b869-b60ef9f0e105",
+    "id": 5,
+    "user_type": "default_user",
+    "profile_picture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/348.jpg",
+    "created": "2023-01-05T12:00:00.231Z"
+  },
+  {
+    "first_name": "Membro",
+    "last_name": "6Teste",
+    "email": "membro6@yahoo.com",
+    "area": {
+      "id": 2,
+      "name": "Financeiro",
+      "created": "2023-01-02T12:00:00.231Z"
+    },
+    "role": {
+      "id": 333461581,
+      "name": "Chefe do Financeiro",
+      "area": {
+        "id": 2,
+        "name": "Financeiro",
+        "created": "2023-01-02T12:00:00.231Z"
+      }
+    },
+    "password": "6",
+    "token": "Token 716fd25a-6708-416e-b869-b60ef9f0e105",
+    "id": 6,
+    "user_type": "default_user",
+    "profile_picture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/348.jpg",
+    "created": "2023-01-06T12:00:00.231Z"
+  },
+  {
+    "first_name": "Membro",
+    "last_name": "7Teste",
+    "email": "membro7@yahoo.com",
+    "area": {
+      "id": 2,
+      "name": "Financeiro",
+      "created": "2023-01-02T12:00:00.231Z"
+    },
+    "role": {
+      "id": 333461581,
+      "name": "Chefe do Financeiro",
+      "area": {
+        "id": 2,
+        "name": "Financeiro",
+        "created": "2023-01-02T12:00:00.231Z"
+      }
+    },
+    "password": "7",
+    "token": "Token 0046fd96-955b-432d-81cd-95fe114d60da",
+    "id": 7,
+    "user_type": "default_user",
+    "profile_picture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/348.jpg",
+    "created": "2023-01-07T12:00:00.231Z"
+  },
+  {
+    "first_name": "Membro",
+    "last_name": "8Teste",
+    "email": "membro8@yahoo.com",
+    "area": {
+      "id": 2,
+      "name": "Financeiro",
+      "created": "2023-01-02T12:00:00.231Z"
+    },
+    "role": {
+      "id": 333461581,
+      "name": "Chefe do Financeiro",
+      "area": {
+        "id": 2,
+        "name": "Financeiro",
+        "created": "2023-01-02T12:00:00.231Z"
+      }
+    },
+    "password": "8",
+    "token": "Token c56500c1-3d9a-44b1-902f-9718b7032bc8",
+    "id": 8,
+    "user_type": "default_user",
+    "profile_picture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/348.jpg",
+    "created": "2023-01-08T12:00:00.231Z"
+  },
+  {
+    "first_name": "Membro",
+    "last_name": "9Teste",
+    "email": "membro9@yahoo.com",
+    "area": {
+      "id": 3,
+      "name": "Desenvolvimento",
+      "created": "2023-01-03T12:00:00.231Z"
+    },
+    "role": {
+      "id": 626905682,
+      "name": "Chefe de Tecnologia",
+      "area": {
+        "id": 3,
+        "name": "Desenvolvimento",
+        "created": "2023-01-03T12:00:00.231Z"
+      }
+    },
+    "password": "9",
+    "token": "Token 54f28d77-5ed2-4fa5-acaa-0ce657cea747",
+    "id": 9,
+    "user_type": "default_user",
+    "profile_picture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/348.jpg",
+    "created": "2023-01-09T12:00:00.231Z"
+  },
+  {
+    "first_name": "Membro",
+    "last_name": "10Teste",
+    "email": "membro10@yahoo.com",
+    "area": {
+      "id": 3,
+      "name": "Desenvolvimento",
+      "created": "2023-01-03T12:00:00.231Z"
+    },
+    "role": {
+      "id": 626905682,
+      "name": "Chefe de Tecnologia",
+      "area": {
+        "id": 3,
+        "name": "Desenvolvimento",
+        "created": "2023-01-03T12:00:00.231Z"
+      }
+    },
+    "password": "10",
+    "token": "Token e226e8cc-b238-41a5-91f6-ee4be329f022",
+    "id": 10,
+    "user_type": "default_user",
+    "profile_picture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/348.jpg",
+    "created": "2023-01-10T12:00:00.231Z"
+  },
+  {
+    "first_name": "Membro",
+    "last_name": "11Teste",
+    "email": "membro11@yahoo.com",
+    "area": {
+      "id": 3,
+      "name": "Desenvolvimento",
+      "created": "2023-01-03T12:00:00.231Z"
+    },
+    "role": {
+      "id": 626905682,
+      "name": "Chefe de Tecnologia",
+      "area": {
+        "id": 3,
+        "name": "Desenvolvimento",
+        "created": "2023-01-03T12:00:00.231Z"
+      }
+    },
+    "password": "11",
+    "token": "Token 90f69d74-b8f6-457f-b5bc-f630bdf35405",
+    "id": 11,
+    "user_type": "default_user",
+    "profile_picture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/348.jpg",
+    "created": "2023-01-11T12:00:00.231Z"
+  },
+  {
+    "first_name": "Membro",
+    "last_name": "12Teste",
+    "email": "membro12@yahoo.com",
+    "area": {
+      "id": 3,
+      "name": "Desenvolvimento",
+      "created": "2023-01-03T12:00:00.231Z"
+    },
+    "role": {
+      "id": 626905682,
+      "name": "Chefe de Tecnologia",
+      "area": {
+        "id": 3,
+        "name": "Desenvolvimento",
+        "created": "2023-01-03T12:00:00.231Z"
+      }
+    },
+    "password": "12",
+    "token": "Token e1846888-8e04-4127-b264-d7e00245681a",
+    "id": 12,
+    "user_type": "default_user",
+    "profile_picture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/348.jpg",
+    "created": "2023-01-12T12:00:00.231Z"
+  },
+  {
+    "first_name": "Membro",
+    "last_name": "13Teste",
+    "email": "membro13@yahoo.com",
+    "area": {
+      "id": 4,
+      "name": "Vendas",
+      "created": "2023-01-04T12:00:00.231Z"
+    },
+    "role": {
+      "id": 187924386,
+      "name": "Vendedor",
+      "area": {
+        "id": 4,
+        "name": "Vendas",
+        "created": "2023-01-04T12:00:00.231Z"
+      }
+    },
+    "password": "13",
+    "token": "Token 3fab695d-e50e-4a0c-b8bb-9039dc1cb107",
+    "id": 13,
+    "user_type": "default_user",
+    "profile_picture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/348.jpg",
+    "created": "2023-01-13T12:00:00.231Z"
+  },
+  {
+    "first_name": "Membro",
+    "last_name": "14Teste",
+    "email": "membro14@yahoo.com",
+    "area": {
+      "id": 4,
+      "name": "Vendas",
+      "created": "2023-01-04T12:00:00.231Z"
+    },
+    "role": {
+      "id": 187924386,
+      "name": "Vendedor",
+      "area": {
+        "id": 4,
+        "name": "Vendas",
+        "created": "2023-01-04T12:00:00.231Z"
+      }
+    },
+    "password": "14",
+    "token": "Token 5b2bda35-ca41-4b52-b83b-44ca047d8f4f",
+    "id": 14,
+    "user_type": "default_user",
+    "profile_picture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/348.jpg",
+    "created": "2023-01-14T12:00:00.231Z"
+  },
+  {
+    "first_name": "Membro",
+    "last_name": "15Teste",
+    "email": "membro15@yahoo.com",
+    "area": {
+      "id": 4,
+      "name": "Vendas",
+      "created": "2023-01-04T12:00:00.231Z"
+    },
+    "role": {
+      "id": 187924386,
+      "name": "Vendedor",
+      "area": {
+        "id": 4,
+        "name": "Vendas",
+        "created": "2023-01-04T12:00:00.231Z"
+      }
+    },
+    "password": "15",
+    "token": "Token db064e99-7249-421c-8dc0-ae43ac77b659",
+    "id": 15,
+    "user_type": "default_user",
+    "profile_picture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/348.jpg",
+    "created": "2023-01-15T12:00:00.231Z"
+  },
+  {
+    "first_name": "Membro",
+    "last_name": "16Teste",
+    "email": "membro16@yahoo.com",
+    "area": {
+      "id": 4,
+      "name": "Vendas",
+      "created": "2023-01-04T12:00:00.231Z"
+    },
+    "role": {
+      "id": 187924386,
+      "name": "Vendedor",
+      "area": {
+        "id": 4,
+        "name": "Vendas",
+        "created": "2023-01-04T12:00:00.231Z"
+      }
+    },
+    "password": "16",
+    "token": "Token 934678b7-bcba-4351-975e-40e1bba47cee",
+    "id": 16,
+    "user_type": "default_user",
+    "profile_picture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/348.jpg",
+    "created": "2023-01-15T12:00:00.231Z"
+  }
+]
