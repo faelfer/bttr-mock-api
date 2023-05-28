@@ -17,10 +17,10 @@ module.exports = {
       // console.log('skillsByPage | db.users: ', db.users);
 
       const tokenFound = (rawHeaders).find(auth.findTokenAuthInHeader);
-      // console.log('createSkil | tokenFound: ', tokenFound);
+      // console.log('skillsByPage | tokenFound: ', tokenFound);
 
       const userFound = (database.users).find((user) => auth.findUserByTokenAuth(user, tokenFound));
-      // console.log('createSkil | userFound: ', userFound);
+      // console.log('skillsByPage | userFound: ', userFound);
 
       if (userFound === undefined) {
         res.status(401).jsonp({
@@ -116,19 +116,19 @@ module.exports = {
     }
   },
 
-  async createSkil(req, res) {
+  async createSkill(req, res) {
     try {
       const { body, rawHeaders } = req;
 
-      // console.log('createSkil | rawHeaders: ', rawHeaders);
-      // console.log('createSkil | body: ', body);
-      // console.log('createSkil | database.users: ', database.users);
+      // console.log('createSkill | rawHeaders: ', rawHeaders);
+      // console.log('createSkill | body: ', body);
+      // console.log('createSkill | database.users: ', database.users);
 
       const tokenFound = (rawHeaders).find(auth.findTokenAuthInHeader);
-      // console.log('createSkil | tokenFound: ', tokenFound);
+      // console.log('createSkill | tokenFound: ', tokenFound);
 
       const userFound = (database.users).find((user) => auth.findUserByTokenAuth(user, tokenFound));
-      // console.log('createSkil | userFound: ', userFound);
+      // console.log('createSkill | userFound: ', userFound);
 
       const skillNameFound = (database.skills).find((skillCycle) => queryItem(
         skillCycle,
@@ -154,17 +154,17 @@ module.exports = {
         newSkill.time_total = 0;
         newSkill.user = userFound;
         newSkill.created = new Date();
-        // console.log('createSkil | newSkill: ', newSkill);
+        // console.log('createSkill | newSkill: ', newSkill);
         const manipuleDatabase = database;
         manipuleDatabase.skills = [...manipuleDatabase.skills, newSkill];
-        // console.log('createSkil | manipuleDatabase.skills: ', manipuleDatabase.skills);
+        // console.log('createSkill | manipuleDatabase.skills: ', manipuleDatabase.skills);
         writeDatabase(manipuleDatabase);
         res.jsonp({
           message: 'habilitade foi criada com sucesso.',
         });
       }
     } catch (error) {
-      console.log('createSkil | error.message: ', error.message);
+      console.log('createSkill | error.message: ', error.message);
       res.status(500).jsonp({
         error: error.message,
       });
@@ -282,46 +282,4 @@ module.exports = {
       });
     }
   },
-
-//   async abiliityAddMinutes(req, res) {
-//     try {
-//       console.log('abiliityAddMinutes | req.userId: ', req.userId);
-//       console.log('abiliityAddMinutes | req.params.id: ', req.params.id);
-//       console.log('abiliityAddMinutes | req.body.minutes: ', req.body.minutes, typeof req.body.minutes);
-
-//       const abiliity = await Abiliity.findOne({
-//         user: req.userId,
-//         _id: req.params.id,
-//       });
-
-//       if (!abiliity) {
-//         return res.status(400).send({ message: 'abiliity or user does not exist' });
-//       }
-//       console.log('abiliityAddMinutes | abiliity: ', abiliity);
-//       console.log('abiliityAddMinutes | abiliity.timeTotal: ', abiliity.timeTotal, typeof abiliity.timeTotal);
-
-//       abiliity.timeTotal += req.body.minutes;
-
-//       console.log('abiliityAddMinutes | abiliity.timeTotal: ', abiliity);
-//       const abiliityNew = await Abiliity.findByIdAndUpdate(
-//         abiliity._id,
-//         { timeTotal: abiliity.timeTotal },
-//         { new: true },
-//       );
-
-//       console.log('abiliityAddMinutes | abiliityNew: ', abiliityNew);
-
-//       const time = await Time.create({
-//         minutes: req.body.minutes,
-//         abiliity: abiliity._id,
-//         user: abiliity.user,
-//       });
-//       console.log('abiliityAddMinutes | time: ', time);
-
-//       return res.json({ message: 'minutes successfully added to abiliity' });
-//     } catch (error) {
-//       console.log('abiliityAddMinutes | error: ', error);
-//       res.status(500).send(error);
-//     }
-//   },
 };

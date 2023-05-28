@@ -1,0 +1,5037 @@
+{
+	"info": {
+		"_postman_id": "9191aa74-975f-4b4c-bc25-dee6183b6223",
+		"name": "Bttr  v0.3.0",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10090520"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Sign Up",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código de status da requisição é 200\", () => {",
+									"    pm.expect(pm.response.code, 'Código da requisição diferente de 200').to.eql(200);",
+									"});",
+									"",
+									"pm.test(\"Verifica as propriedades do objeto response\", () => {",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson, 'Algum elemento não é do tipo objeto ou está faltando alguma chave').to.be.an('object').to.include.all.keys('message');",
+									"});",
+									"",
+									"pm.test(\"Verifica os tipos do objeto response\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson.message, 'o valor da propriedade message não é do tipo string').to.be.a(\"string\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const userUsername = pm.variables.replaceIn(\"{{$randomFirstName}}\");",
+									"const userEmail = pm.variables.replaceIn(\"{{$randomEmail}}\");",
+									"const userPassword = pm.variables.get(\"USER_PASSWORD\");",
+									"",
+									"const body = {",
+									"    mode: \"raw\",",
+									"    raw: JSON.stringify(",
+									"        {",
+									"            \"username\": userUsername,",
+									"            \"email\": userEmail,",
+									"            \"password\": userPassword,",
+									"        }",
+									"    ),",
+									"    options: {",
+									"        raw: {",
+									"            language: \"json\"",
+									"        }",
+									"    }",
+									"}",
+									"",
+									"pm.request.body.update(body);",
+									"pm.environment.set(\"USER_USERNAME\", userUsername);",
+									"pm.environment.set(\"USER_EMAIL\", userEmail);",
+									"pm.environment.set(\"USER_PASSWORD\", userPassword);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/users/sign_up",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"users",
+								"sign_up"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "STATUS 200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/users/sign_up",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"users",
+										"sign_up"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "51"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"33-VjEgcY6DIvVi/P10Pt1Y1E81SqE\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 18:02:45 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"usuário foi criado com sucesso.\"\n}"
+						},
+						{
+							"name": "STATUS 409",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/users/sign_up",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"users",
+										"sign_up"
+									]
+								}
+							},
+							"status": "Conflict",
+							"code": 409,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "50"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"32-mvxjH1WMc1n3sy1bxvUtGDWIoNM\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 17:59:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"nome de usuário já existente.\"\n}"
+						},
+						{
+							"name": "STATUS 409",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/users/sign_up",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"users",
+										"sign_up"
+									]
+								}
+							},
+							"status": "Conflict",
+							"code": 409,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "53"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"35-IIpOforCJyiZi54C4MPubQuW34g\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 18:00:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"usuário com e-mail já existente.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Sign In",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código de status da requisição é 200\", () => {",
+									"    pm.expect(pm.response.code, 'Código da requisição diferente de 200').to.eql(200);",
+									"});",
+									"",
+									"pm.test(\"Verifica as propriedades do objeto usuário\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.environment.set(\"TOKEN_AUTH\", \"Token \" + responseJson.token);",
+									"    pm.environment.set(\"USER_EMAIL\", responseJson.user.email);",
+									"",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson, 'Elemento response não é do tipo objeto ou está faltando alguma chave').to.be.an('object').to.include.all.keys('token', 'user', 'message');",
+									"    pm.expect(responseJson.user, 'Elemento user não é do tipo objeto ou está faltando alguma chave').to.be.an('object').to.include.all.keys('username', 'email');",
+									"});",
+									"",
+									"pm.test(\"Verifica os tipos do objeto usuário\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson.token, 'o valor da propriedade token não é do tipo string').to.be.a(\"string\");",
+									"    pm.expect(responseJson.user, 'o valor da propriedade user não é do tipo objeto').to.be.a(\"object\");",
+									"    pm.expect(responseJson.user.username, 'o valor da propriedade last_name não é do tipo string').to.be.a(\"string\");",
+									"    pm.expect(responseJson.user.email, 'o valor da propriedade email não é do tipo string').to.be.a(\"string\");",
+									"    pm.expect(responseJson.message, 'o valor da propriedade message não é do tipo string').to.be.a(\"string\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"{{USER_EMAIL}}\",\n    \"password\": \"{{USER_PASSWORD}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/users/sign_in",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"users",
+								"sign_in"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "STATUS 200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"{{USER_EMAIL}}\",\n    \"password\": \"{{USER_PASSWORD}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/users/sign_in",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"users",
+										"sign_in"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "333"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"14d-pjzAVEIs7LoG4bwzhvKduNMI2Js\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 18:03:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"60729b93-a13e-427b-a474-b1d59ea944ac\",\n    \"user\": {\n        \"id\": 871182111,\n        \"token\": \"Token 60729b93-a13e-427b-a474-b1d59ea944ac\",\n        \"username\": \"Dallin\",\n        \"email\": \"Mya_Rowe@yahoo.com\",\n        \"password\": \"654321\",\n        \"created\": \"2023-05-28T18:02:45.619Z\"\n    },\n    \"message\": \"autenticação realizada com sucesso.\"\n}"
+						},
+						{
+							"name": "STATUS 401",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"{{USER_EMAIL}}\",\n    \"password\": \"1\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/users/sign_in",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"users",
+										"sign_in"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "35"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"23-wWohltWZ2o47kCpMkrxW/rUo8GA\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 18:04:43 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"senha incorreta.\"\n}"
+						},
+						{
+							"name": "STATUS 404",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"usertest999@gmail.com\",\n    \"password\": \"{{USER_PASSWORD}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/users/sign_in",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"users",
+										"sign_in"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "48"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"30-J0r4mYAa5bRUNHuZJHPePeTZJ00\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 18:05:23 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"usuário não foi encontrado.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código de status da requisição é 200\", () => {",
+									"    pm.expect(pm.response.code, 'Código da requisição diferente de 200').to.eql(200);",
+									"});",
+									"",
+									"pm.test(\"Verifica as propriedades do objeto usuário\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.environment.set(\"USER_EMAIL\", responseJson.user.email);",
+									"",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson.user, 'Elemento user não é do tipo objeto ou está faltando alguma chave').to.be.an('object').to.include.all.keys('username', 'email');",
+									"});",
+									"",
+									"pm.test(\"Verifica os tipos do objeto usuário\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson.user, 'o valor da propriedade user não é do tipo objeto').to.be.a(\"object\");",
+									"    pm.expect(responseJson.user.username, 'o valor da propriedade first_name não é do tipo string').to.be.a(\"string\");",
+									"    pm.expect(responseJson.user.email, 'o valor da propriedade email não é do tipo string').to.be.a(\"string\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{TOKEN_AUTH}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/users/profile",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"users",
+								"profile"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "STATUS 200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/users/profile",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"users",
+										"profile"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "228"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"e4-ODGDVVpNqe3RhzBqTv+nut3lA0A\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 18:06:17 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"user\": {\n        \"id\": 871182111,\n        \"token\": \"Token 60729b93-a13e-427b-a474-b1d59ea944ac\",\n        \"username\": \"Dallin\",\n        \"email\": \"Mya_Rowe@yahoo.com\",\n        \"password\": \"654321\",\n        \"created\": \"2023-05-28T18:02:45.619Z\"\n    }\n}"
+						},
+						{
+							"name": "STATUS 401",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/users/profile",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"users",
+										"profile"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"34-DPb0E9ArnjVtAOdxuUt1Y39HO/s\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 18:06:50 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"token de autenticação inválida\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código de status da requisição é 200\", () => {",
+									"    pm.expect(pm.response.code, 'Código da requisição diferente de 200').to.eql(200);",
+									"});",
+									"",
+									"pm.test(\"Verifica as propriedades do objeto response\", () => {",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson, 'Algum elemento não é do tipo objeto ou está faltando alguma chave').to.be.an('object').to.include.all.keys('message');",
+									"});",
+									"",
+									"pm.test(\"Verifica os tipos do objeto response\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson.message, 'o valor da propriedade message não é do tipo string').to.be.a(\"string\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const userUsername = pm.variables.replaceIn(\"{{$randomFirstName}}\");",
+									"const userEmail = pm.variables.replaceIn(\"{{$randomEmail}}\");",
+									"",
+									"",
+									"const body = {",
+									"    mode: \"raw\",",
+									"    raw: JSON.stringify(",
+									"        {",
+									"            \"username\": userUsername,",
+									"            \"email\": userEmail,",
+									"        }",
+									"    ),",
+									"    options: {",
+									"        raw: {",
+									"            language: \"json\"",
+									"        }",
+									"    }",
+									"}",
+									"",
+									"pm.request.body.update(body);",
+									"pm.environment.set(\"USER_USERNAME\", userUsername);",
+									"pm.environment.set(\"USER_EMAIL\", userEmail);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{TOKEN_AUTH}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/users/profile",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"users",
+								"profile"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "STATUS 200",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/users/profile",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"users",
+										"profile"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "47"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2f-ZMT9pF0Ico5P2Iwv7XD7COb1fvU\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 18:10:28 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"perfil alterado com sucesso.\"\n}"
+						},
+						{
+							"name": "STATUS 401",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/users/profile",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"users",
+										"profile"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "53"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"35-miKQnJkvqspPd5et/ua2iYhLB8s\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 18:10:46 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"token de autenticação inválida.\"\n}"
+						},
+						{
+							"name": "STATUS 409",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/users/profile",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"users",
+										"profile"
+									]
+								}
+							},
+							"status": "Conflict",
+							"code": 409,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "50"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"32-mvxjH1WMc1n3sy1bxvUtGDWIoNM\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 18:17:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"nome de usuário já existente.\"\n}"
+						},
+						{
+							"name": "STATUS 409",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/users/profile",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"users",
+										"profile"
+									]
+								}
+							},
+							"status": "Conflict",
+							"code": 409,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "53"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"35-IIpOforCJyiZi54C4MPubQuW34g\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 18:17:43 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"usuário com e-mail já existente.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Redefine Password",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const userPassword = pm.variables.get(\"USER_PASSWORD\");",
+									"const userNewPassword = pm.variables.get(\"USER_NEW_PASSWORD\");",
+									"",
+									"",
+									"const body = {",
+									"    mode: \"raw\",",
+									"    raw: JSON.stringify(",
+									"        {",
+									"            \"password\": userPassword,",
+									"            \"new_password\": userNewPassword,",
+									"        }",
+									"    ),",
+									"    options: {",
+									"        raw: {",
+									"            language: \"json\"",
+									"        }",
+									"    }",
+									"}",
+									"",
+									"pm.request.body.update(body);",
+									"pm.environment.set(\"USER_PASSWORD\", userNewPassword);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código de status da requisição é 200\", () => {",
+									"    pm.expect(pm.response.code, 'Código da requisição diferente de 200').to.eql(200);",
+									"});",
+									"",
+									"pm.test(\"Verifica as propriedades do objeto response\", () => {",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson, 'Algum elemento não é do tipo objeto ou está faltando alguma chave').to.be.an('object').to.include.all.keys('message');",
+									"});",
+									"",
+									"pm.test(\"Verifica os tipos do objeto response\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson.message, 'o valor da propriedade message não é do tipo string').to.be.a(\"string\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{TOKEN_AUTH}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/users/redefine_password",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"users",
+								"redefine_password"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "STATUS 200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"password\": \"{{USER_PASSWORD}}\",\n    \"new_password\": \"{{USER_NEW_PASSWORD}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/users/redefine_password",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"users",
+										"redefine_password"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "46"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2e-UVCemZrZv+NQjwu8QPSqBrh0vvo\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 18:18:48 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"senha alterada com sucesso.\"\n}"
+						},
+						{
+							"name": "STATUS 401",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/users/redefine_password",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"users",
+										"redefine_password"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "49"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"31-C6kbgH722SzmcvJaweioZX1Iuow\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 18:19:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"senha preenchida é incorreta.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Forgot Password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código de status da requisição é 200\", () => {",
+									"    pm.expect(pm.response.code, 'Código da requisição diferente de 200').to.eql(200);",
+									"});",
+									"",
+									"pm.test(\"Verifica as propriedades do objeto response\", () => {",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson, 'Algum elemento não é do tipo objeto ou está faltando alguma chave').to.be.an('object').to.include.all.keys('message');",
+									"});",
+									"",
+									"pm.test(\"Verifica os tipos do objeto response\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson.message, 'o valor da propriedade message não é do tipo string').to.be.a(\"string\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"{{USER_EMAIL}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/users/forgot_password",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"users",
+								"forgot_password"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "STATUS 200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"{{USER_EMAIL}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/users/forgot_password",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"users",
+										"forgot_password"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "44"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2c-QHEBasUB+/0nbP325sTyks5EuH0\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 18:20:32 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"senha temporária enviada\"\n}"
+						},
+						{
+							"name": "STATUS 404",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"usertest999@gmail.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/users/forgot_password",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"users",
+										"forgot_password"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "48"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"30-J0r4mYAa5bRUNHuZJHPePeTZJ00\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 18:21:15 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"usuário não foi encontrado.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código de status da requisição é 200\", () => {",
+									"    pm.expect(pm.response.code, 'Código da requisição diferente de 200').to.eql(200);",
+									"});",
+									"",
+									"pm.test(\"Verifica as propriedades do objeto response\", () => {",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson, 'Algum elemento não é do tipo objeto ou está faltando alguma chave').to.be.an('object').to.include.all.keys('message');",
+									"});",
+									"",
+									"pm.test(\"Verifica os tipos do objeto response\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson.message, 'o valor da propriedade message não é do tipo string').to.be.a(\"string\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{TOKEN_AUTH}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/users/profile",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"users",
+								"profile"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "STATUS 200",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/users/profile",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"users",
+										"profile"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "49"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"31-FXIk/RWrrzv+s1+byJvSlxUwFr0\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 18:21:46 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"usuário excluido com sucesso.\"\n}"
+						},
+						{
+							"name": "STATUS 401",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/users/profile",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"users",
+										"profile"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"34-DPb0E9ArnjVtAOdxuUt1Y39HO/s\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 18:22:04 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"token de autenticação inválida\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Skill",
+			"item": [
+				{
+					"name": "Create Skill",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código de status da requisição é 200\", () => {",
+									"    pm.expect(pm.response.code, 'Código da requisição diferente de 200').to.eql(200);",
+									"});",
+									"",
+									"pm.test(\"Verifica as propriedades do objeto response\", () => {",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson, 'Algum elemento não é do tipo objeto ou está faltando alguma chave').to.be.an('object').to.include.all.keys('message');",
+									"});",
+									"",
+									"pm.test(\"Verifica os tipos do objeto response\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson.message, 'o valor da propriedade message não é do tipo string').to.be.a(\"string\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{TOKEN_AUTH}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"{{$randomJobArea}}\",\n    \"time_daily\": {{$randomInt}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/skills/create_skill",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"skills",
+								"create_skill"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "STATUS 200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"{{$randomJobArea}}\",\n    \"time_daily\": {{$randomInt}}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/skills/create_skill",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"skills",
+										"create_skill"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "53"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"35-1cUo1jNW20Hd2pE79We88UfNiAA\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 18:28:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"habilitade foi criada com sucesso.\"\n}"
+						},
+						{
+							"name": "STATUS 401",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"{{$randomJobArea}}\",\n    \"time_daily\": {{$randomInt}}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/skills/create_skill",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"skills",
+										"create_skill"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"34-DPb0E9ArnjVtAOdxuUt1Y39HO/s\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 18:28:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"token de autenticação inválida\"\n}"
+						},
+						{
+							"name": "STATUS 409",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"SKILL_TEST_1\",\n    \"time_daily\": {{$randomInt}}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/skills/create_skill",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"skills",
+										"create_skill"
+									]
+								}
+							},
+							"status": "Conflict",
+							"code": 409,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"34-Fwg5P2/+AoJ9WVdzhGJpuCWXdFk\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 18:45:49 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"nome de habilidade já existente.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Skills by Page from User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código de status da requisição é 200\", () => {",
+									"    pm.expect(pm.response.code, 'Código da requisição diferente de 200').to.eql(200);",
+									"});",
+									"",
+									"pm.test(\"Verifica as propriedades do objeto\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson, 'response não é do tipo objeto ou está faltando alguma chave dentro do objeto').to.be.an('object').that.has.all.keys('count', 'next', 'previous', 'results');",
+									"    function checkObjectProperties(area, index, array) {",
+									"        pm.expect(area, 'não é do tipo objeto ou está faltando alguma chave dentro do objeto').to.be.an('object').to.include.all.keys('id', 'name', 'time_daily', 'time_total', 'created', 'user');",
+									"    }",
+									"    ",
+									"    (responseJson.results).forEach(checkObjectProperties);",
+									"});",
+									"",
+									"pm.test(\"Verifica os tipos do objeto\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson.count, 'o valor da propriedade count não é do tipo number').to.be.a(\"number\");",
+									"    pm.expect(responseJson.results, 'O valor retornado não é do tipo array').to.be.an(\"array\");",
+									"",
+									"    function checkObjectTypes(item, index, array) {",
+									"        if (index === (array.length) - 1) {",
+									"            pm.environment.set(\"SKILL_ID\", item.id);",
+									"        }",
+									"",
+									"        pm.expect(item.id, 'o valor da propriedade id não é do tipo number').to.be.a(\"number\");",
+									"        pm.expect(item.name, 'o valor da propriedade name não é do tipo string').to.be.a(\"string\");",
+									"        pm.expect(item.time_daily, 'o valor da propriedade time_daily não é do tipo number').to.be.a(\"number\");",
+									"        pm.expect(item.time_total, 'o valor da propriedade time_total não é do tipo number').to.be.a(\"number\");",
+									"        pm.expect(item.user, 'o valor da propriedade user não é do tipo object').to.be.a(\"object\");",
+									"        pm.expect(item.user.id, 'o valor da propriedade user.id não é do tipo number').to.be.a(\"number\");",
+									"        pm.expect(item.user.username, 'o valor da propriedade user.name não é do tipo string').to.be.a(\"string\");",
+									"    }",
+									"    (responseJson.results).forEach(checkObjectTypes);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{TOKEN_AUTH}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/skills/skills_by_page?page=1",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"skills",
+								"skills_by_page"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "STATUS 200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/skills/skills_by_page?page=1",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"skills",
+										"skills_by_page"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "492"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1ec-Dz9h15xwgHtfKgFVhhRiY3CGJM0\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 18:46:46 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"count\": 1,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\n            \"name\": \"Directives\",\n            \"time_daily\": 415,\n            \"id\": 159232364,\n            \"time_total\": 0,\n            \"user\": {\n                \"id\": 370783636,\n                \"token\": \"Token 5fde3a1f-24e0-4076-ae84-9779fafed0c2\",\n                \"username\": \"Kaden\",\n                \"email\": \"Karlie_Gleichner@gmail.com\",\n                \"password\": \"654321\",\n                \"created\": \"2023-05-28T18:45:33.385Z\"\n            },\n            \"created\": \"2023-05-28T18:46:42.155Z\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "STATUS 401",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/skills/skills_by_page?page=1",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"skills",
+										"skills_by_page"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"34-DPb0E9ArnjVtAOdxuUt1Y39HO/s\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 18:49:40 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"token de autenticação inválida\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Skill by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código de status da requisição é 200\", () => {",
+									"    pm.expect(pm.response.code, 'Código da requisição diferente de 200').to.eql(200);",
+									"});",
+									"",
+									"pm.test(\"Verifica as propriedades do objeto\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson, 'response não é do tipo objeto ou está faltando alguma chave dentro do objeto').to.be.an('object').that.has.all.keys('skill');",
+									"",
+									"    pm.expect(responseJson.skill, 'não é do tipo objeto ou está faltando alguma chave dentro do objeto').to.be.an('object').to.include.all.keys('id', 'name', 'time_daily', 'time_total', 'user', 'created');",
+									"});",
+									"",
+									"pm.test(\"Verifica os tipos do objeto\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.skill, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"",
+									"    pm.expect(responseJson.skill.id, 'o valor da propriedade id não é do tipo number').to.be.a(\"number\");",
+									"    pm.expect(responseJson.skill.name, 'o valor da propriedade name não é do tipo string').to.be.a(\"string\");",
+									"    pm.expect(responseJson.skill.time_daily, 'o valor da propriedade time_daily não é do tipo number').to.be.a(\"number\");",
+									"    pm.expect(responseJson.skill.time_total, 'o valor da propriedade time_total não é do tipo number').to.be.a(\"number\");",
+									"    pm.expect(responseJson.skill.user, 'o valor da propriedade user não é do tipo object').to.be.a(\"object\");",
+									"    pm.expect(responseJson.skill.user.id, 'o valor da propriedade user.id não é do tipo number').to.be.a(\"number\");",
+									"    pm.expect(responseJson.skill.user.username, 'o valor da propriedade user.name não é do tipo string').to.be.a(\"string\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{TOKEN_AUTH}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/skills/skill_by_id/{{SKILL_ID}}",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"skills",
+								"skill_by_id",
+								"{{SKILL_ID}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "STATUS 200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/skills/skill_by_id/{{SKILL_ID}}",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"skills",
+										"skill_by_id",
+										"{{SKILL_ID}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "402"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"192-ayIEL5ojxJuuBXMfSouK8zLCNx8\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 18:50:56 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"skill\": {\n        \"name\": \"Directives\",\n        \"time_daily\": 415,\n        \"id\": 159232364,\n        \"time_total\": 0,\n        \"user\": {\n            \"id\": 370783636,\n            \"token\": \"Token 5fde3a1f-24e0-4076-ae84-9779fafed0c2\",\n            \"username\": \"Kaden\",\n            \"email\": \"Karlie_Gleichner@gmail.com\",\n            \"password\": \"654321\",\n            \"created\": \"2023-05-28T18:45:33.385Z\"\n        },\n        \"created\": \"2023-05-28T18:46:42.155Z\"\n    }\n}"
+						},
+						{
+							"name": "STATUS 401",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/skills/skill_by_id/{{SKILL_ID}}",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"skills",
+										"skill_by_id",
+										"{{SKILL_ID}}"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "53"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"35-miKQnJkvqspPd5et/ua2iYhLB8s\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 18:56:01 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"token de autenticação inválida.\"\n}"
+						},
+						{
+							"name": "STATUS 404",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/skills/skill_by_id/999",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"skills",
+										"skill_by_id",
+										"999"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "50"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"32-t5dNWNnM/phLeqEYFBDq1JVoJhQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 18:57:25 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"habilidade não foi encontrada.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Skill by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código de status da requisição é 200\", () => {",
+									"    pm.expect(pm.response.code, 'Código da requisição diferente de 200').to.eql(200);",
+									"});",
+									"",
+									"pm.test(\"Verifica as propriedades do objeto response\", () => {",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson, 'Algum elemento não é do tipo objeto ou está faltando alguma chave').to.be.an('object').to.include.all.keys('message');",
+									"});",
+									"",
+									"pm.test(\"Verifica os tipos do objeto response\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson.message, 'o valor da propriedade message não é do tipo string').to.be.a(\"string\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{TOKEN_AUTH}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"{{$randomJobArea}}\",\n    \"time_daily\": {{$randomInt}},\n    \"time_total\": {{$randomInt}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/skills/update_skill_by_id/{{SKILL_ID}}",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"skills",
+								"update_skill_by_id",
+								"{{SKILL_ID}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "STATUS 200",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"{{$randomJobArea}}\",\n    \"time_daily\": {{$randomInt}},\n    \"time_total\": {{$randomInt}}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/skills/update_skill_by_id/{{SKILL_ID}}",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"skills",
+										"update_skill_by_id",
+										"{{SKILL_ID}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "51"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"33-iBYjdOJkyttEX2hMOHb6fiV+h+E\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 18:59:25 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"habilidade alterada com sucesso.\"\n}"
+						},
+						{
+							"name": "STATUS 401",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"{{$randomJobArea}}\",\n    \"time_daily\": {{$randomInt}},\n    \"time_total\": {{$randomInt}}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/skills/update_skill_by_id/{{SKILL_ID}}",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"skills",
+										"update_skill_by_id",
+										"{{SKILL_ID}}"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "53"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"35-miKQnJkvqspPd5et/ua2iYhLB8s\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 19:01:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"token de autenticação inválida.\"\n}"
+						},
+						{
+							"name": "STATUS 404",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"{{$randomJobArea}}\",\n    \"time_daily\": {{$randomInt}},\n    \"time_total\": {{$randomInt}}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/skills/update_skill_by_id/999",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"skills",
+										"update_skill_by_id",
+										"999"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "50"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"32-t5dNWNnM/phLeqEYFBDq1JVoJhQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 19:02:11 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"habilidade não foi encontrada.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Skill by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código de status da requisição é 200\", () => {",
+									"    pm.expect(pm.response.code, 'Código da requisição diferente de 200').to.eql(200);",
+									"});",
+									"",
+									"pm.test(\"Verifica as propriedades do objeto response\", () => {",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson, 'Algum elemento não é do tipo objeto ou está faltando alguma chave').to.be.an('object').to.include.all.keys('message');",
+									"});",
+									"",
+									"pm.test(\"Verifica os tipos do objeto response\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson.message, 'o valor da propriedade message não é do tipo string').to.be.a(\"string\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{TOKEN_AUTH}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/skills/delete_skill_by_id/{{SKILL_ID}}",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"skills",
+								"delete_skill_by_id",
+								"{{SKILL_ID}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "STATUS 200",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/skills/delete_skill_by_id/{{SKILL_ID}}",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"skills",
+										"delete_skill_by_id",
+										"{{SKILL_ID}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "51"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"33-aHvXWY/hGV3YecqFTvaQqt8hoXw\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 19:03:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"habilidade excluida com sucesso.\"\n}"
+						},
+						{
+							"name": "STATUS 401",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/skills/delete_skill_by_id/{{SKILL_ID}}",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"skills",
+										"delete_skill_by_id",
+										"{{SKILL_ID}}"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"34-DPb0E9ArnjVtAOdxuUt1Y39HO/s\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 19:05:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"token de autenticação inválida\"\n}"
+						},
+						{
+							"name": "STATUS 404",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/skills/delete_skill_by_id/999",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"skills",
+										"delete_skill_by_id",
+										"999"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "50"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"32-t5dNWNnM/phLeqEYFBDq1JVoJhQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 19:05:43 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"habilidade não foi encontrada.\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Time",
+			"item": [
+				{
+					"name": "Create Time",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código de status da requisição é 200\", () => {",
+									"    pm.expect(pm.response.code, 'Código da requisição diferente de 200').to.eql(200);",
+									"});",
+									"",
+									"pm.test(\"Verifica as propriedades do objeto response\", () => {",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson, 'Algum elemento não é do tipo objeto ou está faltando alguma chave').to.be.an('object').to.include.all.keys('message');",
+									"});",
+									"",
+									"pm.test(\"Verifica os tipos do objeto response\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson.message, 'o valor da propriedade message não é do tipo string').to.be.a(\"string\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{TOKEN_AUTH}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"skill_id\": {{SKILL_ID}},\n    \"minutes\": {{$randomInt}}   \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/times/create_time",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"times",
+								"create_time"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "STATUS 200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"skill_id\": {{SKILL_ID}},\n    \"minutes\": {{$randomInt}}   \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/times/create_time",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"times",
+										"create_time"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "48"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"30-tpTXEL+xR/UfZLCSBYOX+WPByjc\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 19:59:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"tempo foi criado com sucesso.\"\n}"
+						},
+						{
+							"name": "STATUS 401",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"skill_id\": {{SKILL_ID}},\n    \"minutes\": {{$randomInt}}   \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/times/create_time",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"times",
+										"create_time"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"34-DPb0E9ArnjVtAOdxuUt1Y39HO/s\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 19:59:28 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"token de autenticação inválida\"\n}"
+						},
+						{
+							"name": "STATUS 404",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"skill_id\": 99,\n    \"minutes\": {{$randomInt}}   \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/times/create_time",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"times",
+										"create_time"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "50"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"32-t5dNWNnM/phLeqEYFBDq1JVoJhQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 19:59:49 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"habilidade não foi encontrada.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Times by Page from User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código de status da requisição é 200\", () => {",
+									"    pm.expect(pm.response.code, 'Código da requisição diferente de 200').to.eql(200);",
+									"});",
+									"",
+									"pm.test(\"Verifica as propriedades do objeto\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson, 'response não é do tipo objeto ou está faltando alguma chave dentro do objeto').to.be.an('object').that.has.all.keys('count', 'next', 'previous', 'results');",
+									"    function checkObjectProperties(area, index, array) {",
+									"        pm.expect(area, 'não é do tipo objeto ou está faltando alguma chave dentro do objeto').to.be.an('object').to.include.all.keys('id', 'minutes', 'skill', 'user', 'created');",
+									"    }",
+									"    ",
+									"    (responseJson.results).forEach(checkObjectProperties);",
+									"});",
+									"",
+									"pm.test(\"Verifica os tipos do objeto\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson.count, 'o valor da propriedade count não é do tipo number').to.be.a(\"number\");",
+									"    pm.expect(responseJson.results, 'O valor retornado não é do tipo array').to.be.an(\"array\");",
+									"",
+									"    function checkObjectTypes(item, index, array) {",
+									"        if (index === (array.length) - 1) {",
+									"            pm.environment.set(\"TIME_ID\", item.id);",
+									"        }",
+									"",
+									"        pm.expect(item.id, 'o valor da propriedade id não é do tipo number').to.be.a(\"number\");",
+									"        pm.expect(item.minutes, 'o valor da propriedade minutes não é do tipo number').to.be.a(\"number\");",
+									"        pm.expect(item.skill, 'o valor da propriedade skill não é do tipo object').to.be.a(\"object\");",
+									"        pm.expect(item.skill.id, 'o valor da propriedade skill.id não é do tipo number').to.be.a(\"number\");",
+									"        pm.expect(item.skill.name, 'o valor da propriedade skill.name não é do tipo string').to.be.a(\"string\");",
+									"        pm.expect(item.user, 'o valor da propriedade user não é do tipo object').to.be.a(\"object\");",
+									"        pm.expect(item.user.id, 'o valor da propriedade user.id não é do tipo number').to.be.a(\"number\");",
+									"        pm.expect(item.user.username, 'o valor da propriedade user.username não é do tipo string').to.be.a(\"string\");",
+									"    }",
+									"    (responseJson.results).forEach(checkObjectTypes);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{TOKEN_AUTH}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/times/times_by_page?page=1",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"times",
+								"times_by_page"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "STATUS 200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/times/times_by_page?page=1",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"times",
+										"times_by_page"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "888"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"378-hVi+nAx86uFRuuCJVfEkybyrDAg\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 20:23:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"count\": 1,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\n            \"id\": 956839455,\n            \"minutes\": 216,\n            \"skill\": {\n                \"name\": \"Creative\",\n                \"time_daily\": 853,\n                \"id\": 897435466,\n                \"time_total\": 0,\n                \"user\": {\n                    \"id\": 916400018,\n                    \"token\": \"Token c9855e61-00a6-4a44-83f8-67b379e4fe79\",\n                    \"username\": \"Katherine\",\n                    \"email\": \"Bailee30@gmail.com\",\n                    \"password\": \"654321\",\n                    \"created\": \"2023-05-28T19:58:41.204Z\"\n                },\n                \"created\": \"2023-05-28T19:58:54.501Z\"\n            },\n            \"user\": {\n                \"id\": 916400018,\n                \"token\": \"Token c9855e61-00a6-4a44-83f8-67b379e4fe79\",\n                \"username\": \"Katherine\",\n                \"email\": \"Bailee30@gmail.com\",\n                \"password\": \"654321\",\n                \"created\": \"2023-05-28T19:58:41.204Z\"\n            },\n            \"created\": \"2023-05-28T19:59:03.555Z\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "STATUS 401",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/times/times_by_page?page=1",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"times",
+										"times_by_page"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"34-DPb0E9ArnjVtAOdxuUt1Y39HO/s\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 20:24:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"token de autenticação inválida\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Time by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código de status da requisição é 200\", () => {",
+									"    pm.expect(pm.response.code, 'Código da requisição diferente de 200').to.eql(200);",
+									"});",
+									"",
+									"pm.test(\"Verifica as propriedades do objeto\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson, 'response não é do tipo objeto ou está faltando alguma chave dentro do objeto').to.be.an('object').that.has.all.keys('time');",
+									"",
+									"    pm.expect(responseJson.time, 'não é do tipo objeto ou está faltando alguma chave dentro do objeto').to.be.an('object').to.include.all.keys('id', 'minutes', 'skill', 'user', 'created');",
+									"});",
+									"",
+									"pm.test(\"Verifica os tipos do objeto\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.time, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"",
+									"    pm.expect(responseJson.time.id, 'o valor da propriedade id não é do tipo number').to.be.a(\"number\");",
+									"    pm.expect(responseJson.time.minutes, 'o valor da propriedade minutes não é do tipo number').to.be.a(\"number\");",
+									"    pm.expect(responseJson.time.skill, 'o valor da propriedade skill não é do tipo object').to.be.a(\"object\");",
+									"    pm.expect(responseJson.time.skill.id, 'o valor da propriedade skill.id não é do tipo number').to.be.a(\"number\");",
+									"    pm.expect(responseJson.time.skill.name, 'o valor da propriedade skill.name não é do tipo string').to.be.a(\"string\");",
+									"    pm.expect(responseJson.time.user, 'o valor da propriedade user não é do tipo object').to.be.a(\"object\");",
+									"    pm.expect(responseJson.time.user.id, 'o valor da propriedade user.id não é do tipo number').to.be.a(\"number\");",
+									"    pm.expect(responseJson.time.user.username, 'o valor da propriedade user.username não é do tipo string').to.be.a(\"string\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{TOKEN_AUTH}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/times/time_by_id/{{TIME_ID}}",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"times",
+								"time_by_id",
+								"{{TIME_ID}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "STATUS 200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/times/time_by_id/{{TIME_ID}}",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"times",
+										"time_by_id",
+										"{{TIME_ID}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "771"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"303-zV5eYMsphbBChCmXUhJ5jKCRtKs\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 20:33:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"time\": {\n        \"id\": 956839455,\n        \"minutes\": 216,\n        \"skill\": {\n            \"name\": \"Creative\",\n            \"time_daily\": 853,\n            \"id\": 897435466,\n            \"time_total\": 0,\n            \"user\": {\n                \"id\": 916400018,\n                \"token\": \"Token c9855e61-00a6-4a44-83f8-67b379e4fe79\",\n                \"username\": \"Katherine\",\n                \"email\": \"Bailee30@gmail.com\",\n                \"password\": \"654321\",\n                \"created\": \"2023-05-28T19:58:41.204Z\"\n            },\n            \"created\": \"2023-05-28T19:58:54.501Z\"\n        },\n        \"user\": {\n            \"id\": 916400018,\n            \"token\": \"Token c9855e61-00a6-4a44-83f8-67b379e4fe79\",\n            \"username\": \"Katherine\",\n            \"email\": \"Bailee30@gmail.com\",\n            \"password\": \"654321\",\n            \"created\": \"2023-05-28T19:58:41.204Z\"\n        },\n        \"created\": \"2023-05-28T19:59:03.555Z\"\n    }\n}"
+						},
+						{
+							"name": "STATUS 401",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/times/time_by_id/{{TIME_ID}}",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"times",
+										"time_by_id",
+										"{{TIME_ID}}"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "53"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"35-miKQnJkvqspPd5et/ua2iYhLB8s\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 20:33:58 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"token de autenticação inválida.\"\n}"
+						},
+						{
+							"name": "STATUS 404",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/times/time_by_id/999",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"times",
+										"time_by_id",
+										"999"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "45"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2d-Q3iZ3tlIqp1zLVvnxfkFwKDjLNY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 20:34:25 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"tempo não foi encontrada.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Time by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código de status da requisição é 200\", () => {",
+									"    pm.expect(pm.response.code, 'Código da requisição diferente de 200').to.eql(200);",
+									"});",
+									"",
+									"pm.test(\"Verifica as propriedades do objeto response\", () => {",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson, 'Algum elemento não é do tipo objeto ou está faltando alguma chave').to.be.an('object').to.include.all.keys('message');",
+									"});",
+									"",
+									"pm.test(\"Verifica os tipos do objeto response\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson.message, 'o valor da propriedade message não é do tipo string').to.be.a(\"string\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{TOKEN_AUTH}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"skill_id\": {{SKILL_ID}},\n    \"minutes\": {{$randomInt}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/times/update_time_by_id/{{TIME_ID}}",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"times",
+								"update_time_by_id",
+								"{{TIME_ID}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "STATUS 200",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"skill_id\": {{SKILL_ID}},\n    \"minutes\": {{$randomInt}}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/times/update_time_by_id/{{TIME_ID}}",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"times",
+										"update_time_by_id",
+										"{{TIME_ID}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "46"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2e-04QR7LURhG0HjGteU8aSKX0ZVXI\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 21:02:04 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"tempo alterado com sucesso.\"\n}"
+						},
+						{
+							"name": "STATUS 401",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"skill_id\": {{SKILL_ID}},\n    \"minutes\": {{$randomInt}}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/times/update_time_by_id/{{TIME_ID}}",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"times",
+										"update_time_by_id",
+										"{{TIME_ID}}"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "53"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"35-miKQnJkvqspPd5et/ua2iYhLB8s\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 21:03:17 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"token de autenticação inválida.\"\n}"
+						},
+						{
+							"name": "STATUS 404",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"skill_id\": {{SKILL_ID}},\n    \"minutes\": {{$randomInt}}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/times/update_time_by_id/999",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"times",
+										"update_time_by_id",
+										"999"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "45"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2d-SPDuzPgzlDWmVBcmfcw1EuALiMw\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 21:04:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"tempo não foi encontrado.\"\n}"
+						},
+						{
+							"name": "STATUS 404",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"skill_id\": 999,\n    \"minutes\": {{$randomInt}}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/times/update_time_by_id/{{TIME_ID}}",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"times",
+										"update_time_by_id",
+										"{{TIME_ID}}"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "50"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"32-t5dNWNnM/phLeqEYFBDq1JVoJhQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 21:04:37 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"habilidade não foi encontrada.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Time by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código de status da requisição é 200\", () => {",
+									"    pm.expect(pm.response.code, 'Código da requisição diferente de 200').to.eql(200);",
+									"});",
+									"",
+									"pm.test(\"Verifica as propriedades do objeto response\", () => {",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson, 'Algum elemento não é do tipo objeto ou está faltando alguma chave').to.be.an('object').to.include.all.keys('message');",
+									"});",
+									"",
+									"pm.test(\"Verifica os tipos do objeto response\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson.message, 'o valor da propriedade message não é do tipo string').to.be.a(\"string\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{TOKEN_AUTH}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/times/delete_time_by_id/{{TIME_ID}}",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"times",
+								"delete_time_by_id",
+								"{{TIME_ID}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "STATUS 200",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/times/delete_time_by_id/{{TIME_ID}}",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"times",
+										"delete_time_by_id",
+										"{{TIME_ID}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "46"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2e-KIrEcjS1PCrzi+79kmMtmB18tNk\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 21:13:04 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"tempo excluido com sucesso.\"\n}"
+						},
+						{
+							"name": "STATUS 401",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/times/delete_time_by_id/{{TIME_ID}}",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"times",
+										"delete_time_by_id",
+										"{{TIME_ID}}"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"34-DPb0E9ArnjVtAOdxuUt1Y39HO/s\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 21:13:51 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"token de autenticação inválida\"\n}"
+						},
+						{
+							"name": "STATUS 404",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/times/delete_time_by_id/999",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"times",
+										"delete_time_by_id",
+										"999"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "45"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2d-SPDuzPgzlDWmVBcmfcw1EuALiMw\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 21:14:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"tempo não foi encontrado.\"\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}

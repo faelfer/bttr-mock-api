@@ -6,7 +6,7 @@ const multer = require('multer');
 
 const userController = require('./src/controllers/user');
 const skillController = require('./src/controllers/skill');
-// const timeController = require('./src/controllers/time');
+const timeController = require('./src/controllers/time');
 
 const storage = multer.diskStorage({
   destination(req, file, cb) {
@@ -39,22 +39,19 @@ server.patch('/users/profile', userController.profileUpdate);
 server.delete('/users/profile', userController.userDelete);
 server.post('/users/redefine_password', userController.redefinePassword);
 
-server.post('/skills/create_skill', skillController.createSkil);
+server.post('/skills/create_skill', skillController.createSkill);
 server.put('/skills/update_skill_by_id/:skill_id', skillController.updateByIdSkill);
 server.get('/skills/skills_by_page', skillController.skillsByPage);
 server.delete('/skills/delete_skill_by_id/:skill_id', skillController.deleteByIdSkill);
 server.get('/skills/skill_by_id/:skill_id', skillController.skillById);
 
-// server.put("/abiliity/:id/add_minutes", skillController.abiliityAddMinutes);
-// server.get("/time", timeController.timeList);
-// server.get("/time/:id", timeController.timeDetail);
-// server.get("/time/filter_by_abiliity/:id", timeController.timeFilterByAbiliity);
-// server.post("/time", timeController.timeCreate);
-// server.put("/time/:id", timeController.timeUpdate);
-// server.delete("/time/:id", timeController.timeDelete);
-// server.get("/time/filter_by_abiliity_and_date/:id", timeController.timeFilterByAbiliityAndDate);
+server.post('/times/create_time', timeController.createTime);
+server.get('/times/times_by_page', timeController.timesByPage);
+server.get('/times/time_by_id/:time_id', timeController.timeById);
+server.put('/times/update_time_by_id/:time_id', timeController.updateByIdTime);
+server.delete('/times/delete_time_by_id/:time_id', timeController.deleteByIdTime);
 
-server.get('/debug-sentry', (req, res) => {
+server.get('/debug-sentry', () => {
   throw new Error('Checking Sentry Integration!');
 });
 

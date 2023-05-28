@@ -1,0 +1,30 @@
+[
+  {
+    "id": 111,
+    "minutes": 3,
+    "skill": {
+      "id": 11,
+      "name": "SKILL_TEST_1",
+      "time_daily": 1,
+      "time_total": 2,
+      "user": {
+        "id": 1,
+        "token": "Token c14c2374-fbb4-400a-8637-ff8999b76a96",
+        "username": "USER_TEST_1",
+        "email": "usertest1@gmail.com",
+        "password": "123456",
+        "created": "2023-01-01T00:00:00.000Z"
+      },
+      "created": "2023-01-01T00:00:00.000Z"
+    },
+    "user": {
+      "id": 1,
+      "token": "Token c14c2374-fbb4-400a-8637-ff8999b76a96",
+      "username": "USER_TEST_1",
+      "email": "usertest1@gmail.com",
+      "password": "123456",
+      "created": "2023-01-01T00:00:00.000Z"
+    },
+    "created": "2023-05-28T19:52:50.007Z"
+  }
+]
