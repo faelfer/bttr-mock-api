@@ -11,4 +11,10 @@ module.exports = {
 
     return user.token === tokenAuth;
   },
+
+  filterItemsFromUser(item, userId) {
+    // console.log('findItemFromUser | item, userId: ', item, userId);
+
+    return item.user.id === userId;
+  },
 };
