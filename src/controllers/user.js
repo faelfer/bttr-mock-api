@@ -22,9 +22,20 @@ module.exports = {
       ));
       // console.log('signUp | emailFound: ', emailFound);
 
+      const usernameFound = (database.users).find((user) => queryItem(
+        user,
+        'username',
+        body.username,
+      ));
+      // console.log('signUp | usernameFound: ', usernameFound);
+
       if (emailFound !== undefined) {
         res.status(409).jsonp({
           message: 'usuário com e-mail já existente.',
+        });
+      } else if (usernameFound !== undefined) {
+        res.status(409).jsonp({
+          message: 'nome de usuário já existente.',
         });
       } else {
         const newUserId = faker.random.numeric(9);
@@ -179,6 +190,13 @@ module.exports = {
       ));
       // console.log('profileUpdate | emailFound: ', emailFound);
 
+      const usernameFound = (database.users).find((user) => queryItem(
+        user,
+        'username',
+        body.username,
+      ));
+      // console.log('signUp | usernameFound: ', usernameFound);
+
       if (userFound === undefined) {
         res.status(401).jsonp({
           message: 'token de autenticação inválida.',
@@ -186,6 +204,10 @@ module.exports = {
       } else if (emailFound !== undefined && userFound.id !== emailFound.id) {
         res.status(409).jsonp({
           message: 'usuário com e-mail já existente.',
+        });
+      } else if (usernameFound !== undefined && userFound.id !== usernameFound.id) {
+        res.status(409).jsonp({
+          message: 'nome de usuário já existente.',
         });
       } else {
         const manipuleDatabase = database;
