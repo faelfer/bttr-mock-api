@@ -15,15 +15,15 @@ module.exports = {
       console.log('signUp | body: ', body);
       // console.log('signUp | database.users: ', database.users);
 
-      const emailFound = (database.users).find((user) => queryItem(
-        user,
+      const emailFound = (database.users).find((userLoop) => queryItem(
+        userLoop,
         'email',
         body.email,
       ));
       // console.log('signUp | emailFound: ', emailFound);
 
-      const usernameFound = (database.users).find((user) => queryItem(
-        user,
+      const usernameFound = (database.users).find((userCycle) => queryItem(
+        userCycle,
         'username',
         body.username,
       ));

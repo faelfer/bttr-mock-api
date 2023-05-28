@@ -22,39 +22,45 @@ module.exports = {
       const userFound = (database.users).find((user) => auth.findUserByTokenAuth(user, tokenFound));
       // console.log('createSkil | userFound: ', userFound);
 
-      const skillsFromUser = (database.skills).filter(
-        (skillLoop) => auth.filterItemsFromUser(skillLoop, userFound.id),
-      );
+      if (userFound === undefined) {
+        res.status(401).jsonp({
+          message: 'token de autenticação inválida',
+        });
+      } else {
+        const skillsFromUser = (database.skills).filter(
+          (skillLoop) => auth.filterItemsFromUser(skillLoop, userFound.id),
+        );
 
-      const skillsOrderByDate = itemsByDateOrder(skillsFromUser, 'created');
+        const skillsOrderByDate = itemsByDateOrder(skillsFromUser, 'created');
 
-      const amountItensByPage = 5;
-      const currentPage = parseInt(query.page, 10);
+        const amountItensByPage = 5;
+        const currentPage = parseInt(query.page, 10);
 
-      const numberTotalPages = Math.ceil((skillsOrderByDate.length) / amountItensByPage);
+        const numberTotalPages = Math.ceil((skillsOrderByDate.length) / amountItensByPage);
 
-      const indexSliceFinal = (currentPage * amountItensByPage);
-      const indexSliceInitial = indexSliceFinal - amountItensByPage;
+        const indexSliceFinal = (currentPage * amountItensByPage);
+        const indexSliceInitial = indexSliceFinal - amountItensByPage;
 
-      const skillsFromPage = skillsOrderByDate.slice(indexSliceInitial, indexSliceFinal);
+        const skillsFromPage = skillsOrderByDate.slice(indexSliceInitial, indexSliceFinal);
 
-      const nextPage = currentPage + 1;
-      const previousPage = currentPage - 1;
-      // console.log(
-      //   'skillsByPage | numberTotalPages, nextPage, previousPage: ',
-      //   numberTotalPages,
-      //   nextPage,
-      //   previousPage,
-      // );
+        const nextPage = currentPage + 1;
+        const previousPage = currentPage - 1;
+        // console.log(
+        //   'skillsByPage | numberTotalPages, nextPage, previousPage: ',
+        //   numberTotalPages,
+        //   nextPage,
+        //   previousPage,
+        // );
 
-      const response = {
-        count: skillsOrderByDate.length,
-        next: nextPage <= numberTotalPages ? `http://localhost:8000${route.path}?page=${nextPage}` : null,
-        previous: previousPage > 0 ? `http://localhost:8000${route.path}?page=${previousPage}` : null,
-        results: skillsFromPage,
-      };
-      // console.log('skillsByPage | response: ', response);
-      res.jsonp(response);
+        const response = {
+          count: skillsOrderByDate.length,
+          next: nextPage <= numberTotalPages ? `http://localhost:8000${route.path}?page=${nextPage}` : null,
+          previous: previousPage > 0 ? `http://localhost:8000${route.path}?page=${previousPage}` : null,
+          results: skillsFromPage,
+        };
+        // console.log('skillsByPage | response: ', response);
+        res.jsonp(response);
+      }
     } catch (error) {
       console.log('skillsByPage | error.message: ', error.message);
       res.status(500).jsonp({
@@ -75,30 +81,32 @@ module.exports = {
       const userFound = (database.users).find((user) => auth.findUserByTokenAuth(user, tokenFound));
       console.log('skillById | userFound: ', userFound);
 
-      const skillsFromUser = (database.skills).filter(
-        (skillLoop) => auth.filterItemsFromUser(skillLoop, userFound.id),
-      );
-      console.log('skillById | skillsFromUser: ', skillsFromUser);
-
-      const skillFound = skillsFromUser.find((skillCycle) => queryItem(
-        skillCycle,
-        'id',
-        parseInt(params.skill_id, 10),
-      ));
-      console.log('skillById | skillFound: ', skillFound);
-
       if (userFound === undefined) {
         res.status(401).jsonp({
           message: 'token de autenticação inválida.',
         });
-      } else if (skillFound === undefined) {
-        res.status(404).jsonp({
-          message: 'habilidade não foi encontrado.',
-        });
       } else {
-        res.jsonp({
-          skill: skillFound,
-        });
+        const skillsFromUser = (database.skills).filter(
+          (skillLoop) => auth.filterItemsFromUser(skillLoop, userFound.id),
+        );
+        console.log('skillById | skillsFromUser: ', skillsFromUser);
+
+        const skillFound = skillsFromUser.find((skillCycle) => queryItem(
+          skillCycle,
+          'id',
+          parseInt(params.skill_id, 10),
+        ));
+        console.log('skillById | skillFound: ', skillFound);
+
+        if (skillFound === undefined) {
+          res.status(404).jsonp({
+            message: 'habilidade não foi encontrada.',
+          });
+        } else {
+          res.jsonp({
+            skill: skillFound,
+          });
+        }
       }
     } catch (error) {
       console.log('skillById | error.message: ', error.message);
@@ -122,9 +130,19 @@ module.exports = {
       const userFound = (database.users).find((user) => auth.findUserByTokenAuth(user, tokenFound));
       // console.log('createSkil | userFound: ', userFound);
 
+      const skillNameFound = (database.skills).find((skillCycle) => queryItem(
+        skillCycle,
+        'name',
+        body.name,
+      ));
+
       if (userFound === undefined) {
         res.status(401).jsonp({
           message: 'token de autenticação inválida',
+        });
+      } else if (skillNameFound !== undefined) {
+        res.status(409).jsonp({
+          message: 'nome de habilidade já existente.',
         });
       } else {
         const newSkill = body;
@@ -167,41 +185,43 @@ module.exports = {
       const userFound = (database.users).find((user) => auth.findUserByTokenAuth(user, tokenFound));
       console.log('updateByIdSkill | userFound: ', userFound);
 
-      const skillsFromUser = (database.skills).filter(
-        (skillLoop) => auth.filterItemsFromUser(skillLoop, userFound.id),
-      );
-      console.log('updateByIdSkill | skillsFromUser: ', skillsFromUser);
-
-      const skillFound = skillsFromUser.find((skillCycle) => queryItem(
-        skillCycle,
-        'id',
-        parseInt(params.skill_id, 10),
-      ));
-      console.log('updateByIdSkill | skillFound: ', skillFound);
-
       if (userFound === undefined) {
         res.status(401).jsonp({
           message: 'token de autenticação inválida.',
         });
-      } else if (skillFound === undefined) {
-        res.status(404).jsonp({
-          message: 'habilidade não foi encontrada.',
-        });
       } else {
-        const manipuleDatabase = database;
-        const indexFromSkillFound = (manipuleDatabase.skills).indexOf(skillFound);
-        manipuleDatabase.skills[indexFromSkillFound].name = body.name;
-        manipuleDatabase.skills[indexFromSkillFound].time_daily = body.time_daily;
-        manipuleDatabase.skills[indexFromSkillFound].time_total = body.time_total;
-        // console.log(
-        //   'updateByIdSkill | manipuleDatabase.skills[indexFromSkillFound]: ',
-        //   manipuleDatabase.skills[indexFromSkillFound],
-        // );
+        const skillsFromUser = (database.skills).filter(
+          (skillLoop) => auth.filterItemsFromUser(skillLoop, userFound.id),
+        );
+        console.log('updateByIdSkill | skillsFromUser: ', skillsFromUser);
 
-        writeDatabase(manipuleDatabase);
-        res.jsonp({
-          message: 'habilidade alterado com sucesso.',
-        });
+        const skillFound = skillsFromUser.find((skillCycle) => queryItem(
+          skillCycle,
+          'id',
+          parseInt(params.skill_id, 10),
+        ));
+        console.log('updateByIdSkill | skillFound: ', skillFound);
+
+        if (skillFound === undefined) {
+          res.status(404).jsonp({
+            message: 'habilidade não foi encontrada.',
+          });
+        } else {
+          const manipuleDatabase = database;
+          const indexFromSkillFound = (manipuleDatabase.skills).indexOf(skillFound);
+          manipuleDatabase.skills[indexFromSkillFound].name = body.name;
+          manipuleDatabase.skills[indexFromSkillFound].time_daily = body.time_daily;
+          manipuleDatabase.skills[indexFromSkillFound].time_total = body.time_total;
+          // console.log(
+          //   'updateByIdSkill | manipuleDatabase.skills[indexFromSkillFound]: ',
+          //   manipuleDatabase.skills[indexFromSkillFound],
+          // );
+
+          writeDatabase(manipuleDatabase);
+          res.jsonp({
+            message: 'habilidade alterada com sucesso.',
+          });
+        }
       }
     } catch (error) {
       console.log('updateByIdSkill | error.message: ', error.message);
@@ -223,35 +243,37 @@ module.exports = {
       const userFound = (database.users).find((user) => auth.findUserByTokenAuth(user, tokenFound));
       // console.log('deleteByIdSkill | userFound: ', userFound);
 
-      const skillsFromUser = (database.skills).filter(
-        (skillLoop) => auth.filterItemsFromUser(skillLoop, userFound.id),
-      );
-      console.log('deleteByIdSkill | skillsFromUser: ', skillsFromUser);
-
-      const skillFound = skillsFromUser.find((timeCycle) => queryItem(
-        timeCycle,
-        'id',
-        parseInt(params.skill_id, 10),
-      ));
-      // console.log('deleteByIdSkill | skillFound: ', skillFound);
-
       if (userFound === undefined) {
         res.status(401).jsonp({
           message: 'token de autenticação inválida',
         });
-      } else if (skillFound === undefined) {
-        res.status(404).jsonp({
-          message: 'habilidade não foi encontrada.',
-        });
       } else {
-        const manipuleDatabase = database;
-        const indexFromSkillFound = (manipuleDatabase.skills).indexOf(skillFound);
-        (manipuleDatabase.skills).splice(indexFromSkillFound, 1);
-        // console.log('deleteByIdSkill | manipuleDatabase.skills: ', manipuleDatabase.skills);
-        writeDatabase(manipuleDatabase);
-        res.jsonp({
-          message: 'habilidade excluida com sucesso.',
-        });
+        const skillsFromUser = (database.skills).filter(
+          (skillLoop) => auth.filterItemsFromUser(skillLoop, userFound.id),
+        );
+        console.log('deleteByIdSkill | skillsFromUser: ', skillsFromUser);
+
+        const skillFound = skillsFromUser.find((timeCycle) => queryItem(
+          timeCycle,
+          'id',
+          parseInt(params.skill_id, 10),
+        ));
+        // console.log('deleteByIdSkill | skillFound: ', skillFound);
+
+        if (skillFound === undefined) {
+          res.status(404).jsonp({
+            message: 'habilidade não foi encontrada.',
+          });
+        } else {
+          const manipuleDatabase = database;
+          const indexFromSkillFound = (manipuleDatabase.skills).indexOf(skillFound);
+          (manipuleDatabase.skills).splice(indexFromSkillFound, 1);
+          // console.log('deleteByIdSkill | manipuleDatabase.skills: ', manipuleDatabase.skills);
+          writeDatabase(manipuleDatabase);
+          res.jsonp({
+            message: 'habilidade excluida com sucesso.',
+          });
+        }
       }
     } catch (error) {
       console.log('deleteByIdSkill | error.message: ', error.message);
