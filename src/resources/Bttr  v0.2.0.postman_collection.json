@@ -1,0 +1,1189 @@
+{
+	"info": {
+		"_postman_id": "9191aa74-975f-4b4c-bc25-dee6183b6223",
+		"name": "Bttr  v0.2.0",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10090520"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Sign Up",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código de status da requisição é 200\", () => {",
+									"    pm.expect(pm.response.code, 'Código da requisição diferente de 200').to.eql(200);",
+									"});",
+									"",
+									"pm.test(\"Verifica as propriedades do objeto response\", () => {",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson, 'Algum elemento não é do tipo objeto ou está faltando alguma chave').to.be.an('object').to.include.all.keys('message');",
+									"});",
+									"",
+									"pm.test(\"Verifica os tipos do objeto response\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson.message, 'o valor da propriedade message não é do tipo string').to.be.a(\"string\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const userUsername = pm.variables.replaceIn(\"{{$randomFirstName}}\");",
+									"const userEmail = pm.variables.replaceIn(\"{{$randomEmail}}\");",
+									"const userPassword = pm.variables.get(\"USER_PASSWORD\");",
+									"",
+									"const body = {",
+									"    mode: \"raw\",",
+									"    raw: JSON.stringify(",
+									"        {",
+									"            \"username\": userUsername,",
+									"            \"email\": userEmail,",
+									"            \"password\": userPassword,",
+									"        }",
+									"    ),",
+									"    options: {",
+									"        raw: {",
+									"            language: \"json\"",
+									"        }",
+									"    }",
+									"}",
+									"",
+									"pm.request.body.update(body);",
+									"pm.environment.set(\"USER_USERNAME\", userUsername);",
+									"pm.environment.set(\"USER_EMAIL\", userEmail);",
+									"pm.environment.set(\"USER_PASSWORD\", userPassword);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/users/sign_up",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"users",
+								"sign_up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign In",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código de status da requisição é 200\", () => {",
+									"    pm.expect(pm.response.code, 'Código da requisição diferente de 200').to.eql(200);",
+									"});",
+									"",
+									"pm.test(\"Verifica as propriedades do objeto usuário\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.environment.set(\"TOKEN_AUTH\", \"Token \" + responseJson.token);",
+									"    pm.environment.set(\"USER_EMAIL\", responseJson.user.email);",
+									"",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson, 'Elemento response não é do tipo objeto ou está faltando alguma chave').to.be.an('object').to.include.all.keys('token', 'user', 'message');",
+									"    pm.expect(responseJson.user, 'Elemento user não é do tipo objeto ou está faltando alguma chave').to.be.an('object').to.include.all.keys('username', 'email');",
+									"});",
+									"",
+									"pm.test(\"Verifica os tipos do objeto usuário\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson.token, 'o valor da propriedade token não é do tipo string').to.be.a(\"string\");",
+									"    pm.expect(responseJson.user, 'o valor da propriedade user não é do tipo objeto').to.be.a(\"object\");",
+									"    pm.expect(responseJson.user.username, 'o valor da propriedade last_name não é do tipo string').to.be.a(\"string\");",
+									"    pm.expect(responseJson.user.email, 'o valor da propriedade email não é do tipo string').to.be.a(\"string\");",
+									"    pm.expect(responseJson.message, 'o valor da propriedade message não é do tipo string').to.be.a(\"string\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"{{USER_EMAIL}}\",\n    \"password\": \"{{USER_PASSWORD}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/users/sign_in",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"users",
+								"sign_in"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código de status da requisição é 200\", () => {",
+									"    pm.expect(pm.response.code, 'Código da requisição diferente de 200').to.eql(200);",
+									"});",
+									"",
+									"pm.test(\"Verifica as propriedades do objeto usuário\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.environment.set(\"USER_EMAIL\", responseJson.user.email);",
+									"",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson.user, 'Elemento user não é do tipo objeto ou está faltando alguma chave').to.be.an('object').to.include.all.keys('username', 'email');",
+									"});",
+									"",
+									"pm.test(\"Verifica os tipos do objeto usuário\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson.user, 'o valor da propriedade user não é do tipo objeto').to.be.a(\"object\");",
+									"    pm.expect(responseJson.user.username, 'o valor da propriedade first_name não é do tipo string').to.be.a(\"string\");",
+									"    pm.expect(responseJson.user.email, 'o valor da propriedade email não é do tipo string').to.be.a(\"string\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{TOKEN_AUTH}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/users/profile",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"users",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código de status da requisição é 200\", () => {",
+									"    pm.expect(pm.response.code, 'Código da requisição diferente de 200').to.eql(200);",
+									"});",
+									"",
+									"pm.test(\"Verifica as propriedades do objeto response\", () => {",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson, 'Algum elemento não é do tipo objeto ou está faltando alguma chave').to.be.an('object').to.include.all.keys('message');",
+									"});",
+									"",
+									"pm.test(\"Verifica os tipos do objeto response\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson.message, 'o valor da propriedade message não é do tipo string').to.be.a(\"string\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const userUsername = pm.variables.replaceIn(\"{{$randomFirstName}}\");",
+									"const userEmail = pm.variables.replaceIn(\"{{$randomEmail}}\");",
+									"",
+									"",
+									"const body = {",
+									"    mode: \"raw\",",
+									"    raw: JSON.stringify(",
+									"        {",
+									"            \"username\": userUsername,",
+									"            \"email\": userEmail,",
+									"        }",
+									"    ),",
+									"    options: {",
+									"        raw: {",
+									"            language: \"json\"",
+									"        }",
+									"    }",
+									"}",
+									"",
+									"pm.request.body.update(body);",
+									"pm.environment.set(\"USER_USERNAME\", userUsername);",
+									"pm.environment.set(\"USER_EMAIL\", userEmail);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{TOKEN_AUTH}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/users/profile",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"users",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Redefine Password",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const userPassword = pm.variables.get(\"USER_PASSWORD\");",
+									"const userNewPassword = pm.variables.get(\"USER_NEW_PASSWORD\");",
+									"",
+									"",
+									"const body = {",
+									"    mode: \"raw\",",
+									"    raw: JSON.stringify(",
+									"        {",
+									"            \"password\": userPassword,",
+									"            \"new_password\": userNewPassword,",
+									"        }",
+									"    ),",
+									"    options: {",
+									"        raw: {",
+									"            language: \"json\"",
+									"        }",
+									"    }",
+									"}",
+									"",
+									"pm.request.body.update(body);",
+									"pm.environment.set(\"USER_PASSWORD\", userNewPassword);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código de status da requisição é 200\", () => {",
+									"    pm.expect(pm.response.code, 'Código da requisição diferente de 200').to.eql(200);",
+									"});",
+									"",
+									"pm.test(\"Verifica as propriedades do objeto response\", () => {",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson, 'Algum elemento não é do tipo objeto ou está faltando alguma chave').to.be.an('object').to.include.all.keys('message');",
+									"});",
+									"",
+									"pm.test(\"Verifica os tipos do objeto response\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson.message, 'o valor da propriedade message não é do tipo string').to.be.a(\"string\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{TOKEN_AUTH}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\": \"{{USER_PASSWORD}}\",\n    \"new_password\": \"{{USER_NEW_PASSWORD}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/users/redefine_password",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"users",
+								"redefine_password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forgot Password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código de status da requisição é 200\", () => {",
+									"    pm.expect(pm.response.code, 'Código da requisição diferente de 200').to.eql(200);",
+									"});",
+									"",
+									"pm.test(\"Verifica as propriedades do objeto response\", () => {",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson, 'Algum elemento não é do tipo objeto ou está faltando alguma chave').to.be.an('object').to.include.all.keys('message');",
+									"});",
+									"",
+									"pm.test(\"Verifica os tipos do objeto response\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson.message, 'o valor da propriedade message não é do tipo string').to.be.a(\"string\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"{{USER_EMAIL}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/users/forgot_password",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"users",
+								"forgot_password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código de status da requisição é 200\", () => {",
+									"    pm.expect(pm.response.code, 'Código da requisição diferente de 200').to.eql(200);",
+									"});",
+									"",
+									"pm.test(\"Verifica as propriedades do objeto response\", () => {",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson, 'Algum elemento não é do tipo objeto ou está faltando alguma chave').to.be.an('object').to.include.all.keys('message');",
+									"});",
+									"",
+									"pm.test(\"Verifica os tipos do objeto response\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson.message, 'o valor da propriedade message não é do tipo string').to.be.a(\"string\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{TOKEN_AUTH}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/users/profile",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"users",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Skill",
+			"item": [
+				{
+					"name": "Create Skill",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código de status da requisição é 200\", () => {",
+									"    pm.expect(pm.response.code, 'Código da requisição diferente de 200').to.eql(200);",
+									"});",
+									"",
+									"pm.test(\"Verifica as propriedades do objeto response\", () => {",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson, 'Algum elemento não é do tipo objeto ou está faltando alguma chave').to.be.an('object').to.include.all.keys('message');",
+									"});",
+									"",
+									"pm.test(\"Verifica os tipos do objeto response\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson.message, 'o valor da propriedade message não é do tipo string').to.be.a(\"string\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{TOKEN_AUTH}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"{{$randomJobArea}}\",\n    \"time_daily\": {{$randomInt}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/skills/create_skill",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"skills",
+								"create_skill"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Skills By Page From User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código de status da requisição é 200\", () => {",
+									"    pm.expect(pm.response.code, 'Código da requisição diferente de 200').to.eql(200);",
+									"});",
+									"",
+									"pm.test(\"Verifica as propriedades do objeto\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson, 'response não é do tipo objeto ou está faltando alguma chave dentro do objeto').to.be.an('object').that.has.all.keys('count', 'next', 'previous', 'results');",
+									"    function checkObjectProperties(area, index, array) {",
+									"        pm.expect(area, 'área não é do tipo objeto ou está faltando alguma chave dentro do objeto').to.be.an('object').to.include.all.keys('id', 'name', 'time_daily', 'time_total', 'created', 'user');",
+									"    }",
+									"    ",
+									"    (responseJson.results).forEach(checkObjectProperties);",
+									"});",
+									"",
+									"pm.test(\"Verifica os tipos do objeto\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson.count, 'o valor da propriedade count não é do tipo number').to.be.a(\"number\");",
+									"    pm.expect(responseJson.results, 'O valor retornado não é do tipo array').to.be.an(\"array\");",
+									"",
+									"    function checkObjectTypes(item, index, array) {",
+									"        if (index === (array.length) - 1) {",
+									"            pm.environment.set(\"SKILL_ID\", item.id);",
+									"        }",
+									"",
+									"        pm.expect(item.id, 'o valor da propriedade id não é do tipo number').to.be.a(\"number\");",
+									"        pm.expect(item.name, 'o valor da propriedade name não é do tipo string').to.be.a(\"string\");",
+									"        pm.expect(item.time_daily, 'o valor da propriedade time_daily não é do tipo number').to.be.a(\"number\");",
+									"        pm.expect(item.time_total, 'o valor da propriedade time_total não é do tipo number').to.be.a(\"number\");",
+									"        pm.expect(item.user, 'o valor da propriedade user não é do tipo object').to.be.a(\"object\");",
+									"        pm.expect(item.user.id, 'o valor da propriedade user.id não é do tipo number').to.be.a(\"number\");",
+									"        pm.expect(item.user.username, 'o valor da propriedade user.name não é do tipo string').to.be.a(\"string\");",
+									"    }",
+									"    (responseJson.results).forEach(checkObjectTypes);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{TOKEN_AUTH}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/skills/skills_by_page?page=1",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"skills",
+								"skills_by_page"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Skill by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código de status da requisição é 200\", () => {",
+									"    pm.expect(pm.response.code, 'Código da requisição diferente de 200').to.eql(200);",
+									"});",
+									"",
+									"pm.test(\"Verifica as propriedades do objeto\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson, 'response não é do tipo objeto ou está faltando alguma chave dentro do objeto').to.be.an('object').that.has.all.keys('skill');",
+									"",
+									"    pm.expect(responseJson.skill, 'área não é do tipo objeto ou está faltando alguma chave dentro do objeto').to.be.an('object').to.include.all.keys('id', 'name', 'time_daily', 'time_total', 'user', 'created');",
+									"});",
+									"",
+									"pm.test(\"Verifica os tipos do objeto\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.skill, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"",
+									"    pm.expect(responseJson.skill.id, 'o valor da propriedade id não é do tipo number').to.be.a(\"number\");",
+									"    pm.expect(responseJson.skill.name, 'o valor da propriedade name não é do tipo string').to.be.a(\"string\");",
+									"    pm.expect(responseJson.skill.time_daily, 'o valor da propriedade time_daily não é do tipo number').to.be.a(\"number\");",
+									"    pm.expect(responseJson.skill.time_total, 'o valor da propriedade time_total não é do tipo number').to.be.a(\"number\");",
+									"    pm.expect(responseJson.skill.user, 'o valor da propriedade user não é do tipo object').to.be.a(\"object\");",
+									"    pm.expect(responseJson.skill.user.id, 'o valor da propriedade user.id não é do tipo number').to.be.a(\"number\");",
+									"    pm.expect(responseJson.skill.user.username, 'o valor da propriedade user.name não é do tipo string').to.be.a(\"string\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{TOKEN_AUTH}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/skills/skill_by_id/{{SKILL_ID}}",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"skills",
+								"skill_by_id",
+								"{{SKILL_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Skill by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código de status da requisição é 200\", () => {",
+									"    pm.expect(pm.response.code, 'Código da requisição diferente de 200').to.eql(200);",
+									"});",
+									"",
+									"pm.test(\"Verifica as propriedades do objeto response\", () => {",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson, 'Algum elemento não é do tipo objeto ou está faltando alguma chave').to.be.an('object').to.include.all.keys('message');",
+									"});",
+									"",
+									"pm.test(\"Verifica os tipos do objeto response\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson.message, 'o valor da propriedade message não é do tipo string').to.be.a(\"string\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{TOKEN_AUTH}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"{{$randomJobArea}}\",\n    \"time_daily\": {{$randomInt}},\n    \"time_total\": {{$randomInt}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/skills/update_skill_by_id/{{SKILL_ID}}",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"skills",
+								"update_skill_by_id",
+								"{{SKILL_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Skill by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código de status da requisição é 200\", () => {",
+									"    pm.expect(pm.response.code, 'Código da requisição diferente de 200').to.eql(200);",
+									"});",
+									"",
+									"pm.test(\"Verifica as propriedades do objeto response\", () => {",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson, 'Algum elemento não é do tipo objeto ou está faltando alguma chave').to.be.an('object').to.include.all.keys('message');",
+									"});",
+									"",
+									"pm.test(\"Verifica os tipos do objeto response\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson.message, 'o valor da propriedade message não é do tipo string').to.be.a(\"string\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{TOKEN_AUTH}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/skills/delete_skill_by_id/{{SKILL_ID}}",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"skills",
+								"delete_skill_by_id",
+								"{{SKILL_ID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Time",
+			"item": [
+				{
+					"name": "Add Time in Progress by ID",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"minutes\": 75\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_DEV}}/api/abiliity/{{ABILIITY_ID}}/add_minutes",
+							"host": [
+								"{{URL_DEV}}"
+							],
+							"path": [
+								"api",
+								"abiliity",
+								"{{ABILIITY_ID}}",
+								"add_minutes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Index",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL_DEV}}/api/time",
+							"host": [
+								"{{URL_DEV}}"
+							],
+							"path": [
+								"api",
+								"time"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Time by ID",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL_DEV}}/api/time/{{TIME_ID\n}}",
+							"host": [
+								"{{URL_DEV}}"
+							],
+							"path": [
+								"api",
+								"time",
+								"{{TIME_ID\n}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Store",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"minutes\": 1,\n    \"abiliity\": \"603c63914c13f60b5e1cf1c1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_DEV}}/api/time",
+							"host": [
+								"{{URL_DEV}}"
+							],
+							"path": [
+								"api",
+								"time"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Time by ID",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"minutes\": 75,\n    \"progress\": \"603c63914c13f60b5e1cf1c1\",\n    \"progressName\": \"Development\",\n    \"createAt\": \"2021-02-02T16:57:20.896Z\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_DEV}}/api/time/603fbe1fa6ff5a12d61cb55f",
+							"host": [
+								"{{URL_DEV}}"
+							],
+							"path": [
+								"api",
+								"time",
+								"603fbe1fa6ff5a12d61cb55f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL_DEV}}/api/time/5f6954529d5c5d0d8e5443ed",
+							"host": [
+								"{{URL_DEV}}"
+							],
+							"path": [
+								"api",
+								"time",
+								"5f6954529d5c5d0d8e5443ed"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filter by Abiliity ID",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL_DEV}}/api/time/filter_by_progress/{{ABILIITY_ID}}",
+							"host": [
+								"{{URL_DEV}}"
+							],
+							"path": [
+								"api",
+								"time",
+								"filter_by_progress",
+								"{{ABILIITY_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Progress Month by Abiliity ID",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{USER_TOKEN}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL_DEV}}/api/time/historic_month/{{ABILIITY_ID}}",
+							"host": [
+								"{{URL_DEV}}"
+							],
+							"path": [
+								"api",
+								"time",
+								"historic_month",
+								"{{ABILIITY_ID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
