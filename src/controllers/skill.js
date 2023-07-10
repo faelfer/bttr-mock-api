@@ -151,7 +151,6 @@ module.exports = {
         newSkill.id = newSkillIdNumber;
         newSkill.name = body.name;
         newSkill.time_daily = body.time_daily;
-        newSkill.time_total = 0;
         newSkill.user = userFound;
         newSkill.created = new Date();
         // console.log('createSkill | newSkill: ', newSkill);
@@ -211,7 +210,6 @@ module.exports = {
           const indexFromSkillFound = (manipuleDatabase.skills).indexOf(skillFound);
           manipuleDatabase.skills[indexFromSkillFound].name = body.name;
           manipuleDatabase.skills[indexFromSkillFound].time_daily = body.time_daily;
-          manipuleDatabase.skills[indexFromSkillFound].time_total = body.time_total;
           // console.log(
           //   'updateByIdSkill | manipuleDatabase.skills[indexFromSkillFound]: ',
           //   manipuleDatabase.skills[indexFromSkillFound],

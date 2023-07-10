@@ -6,7 +6,6 @@
       "id": 11,
       "name": "SKILL_TEST_1",
       "time_daily": 1,
-      "time_total": 2,
       "user": {
         "id": 1,
         "token": "Token c14c2374-fbb4-400a-8637-ff8999b76a96",
