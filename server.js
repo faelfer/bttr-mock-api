@@ -50,6 +50,7 @@ server.get('/times/times_by_page', timeController.timesByPage);
 server.get('/times/time_by_id/:time_id', timeController.timeById);
 server.put('/times/update_time_by_id/:time_id', timeController.updateByIdTime);
 server.delete('/times/delete_time_by_id/:time_id', timeController.deleteByIdTime);
+server.get('/times/times_by_date', timeController.timesByDate);
 
 server.get('/debug-sentry', () => {
   throw new Error('Checking Sentry Integration!');

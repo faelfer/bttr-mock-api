@@ -30,7 +30,22 @@ module.exports = {
       dateStart,
       dateEnd,
     );
-    return new Date(itemLoop[itemProperty]) > dateStart
-      && new Date(itemLoop[itemProperty]) < dateEnd;
+    return new Date(itemLoop[itemProperty]) > new Date(dateStart)
+      && new Date(itemLoop[itemProperty]) < new Date(dateEnd);
+  },
+
+  queryForeignItem(
+    itemLoop,
+    itemObject,
+    itemProperty,
+    itemValue,
+  ) {
+    // console.log(
+    //   'queryItem | itemLoop, itemProperty, itemValue: ',
+    //   itemLoop,
+    //   itemProperty,
+    //   itemValue,
+    // );
+    return itemLoop[itemObject][itemProperty] === itemValue;
   },
 };

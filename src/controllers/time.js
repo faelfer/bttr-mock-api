@@ -6,7 +6,11 @@ const database = require('../../database.json');
 const auth = require('../utils/auth');
 const writeDatabase = require('../utils/writeDatabase');
 const itemsByDateOrder = require('../utils/itemsByDateOrder');
-const { queryItem } = require('../utils/ORMDatabase');
+const {
+  queryItem,
+  queryForeignItem,
+  queryByDateRange,
+} = require('../utils/ORMDatabase');
 
 module.exports = {
   async timesByPage(req, res) {
@@ -303,6 +307,60 @@ module.exports = {
       }
     } catch (error) {
       console.log('deleteByIdTime | error.message: ', error.message);
+      res.status(500).jsonp({
+        error: error.message,
+      });
+    }
+  },
+
+  async timesByDate(req, res) {
+    try {
+      const { query, rawHeaders } = req;
+      console.log('timesByPage | query: ', query);
+      // console.log('timesByPage | db.users: ', db.users);
+
+      const tokenFound = (rawHeaders).find(auth.findTokenAuthInHeader);
+      // console.log('timesByPage | tokenFound: ', tokenFound);
+
+      const userFound = (database.users).find((user) => auth.findUserByTokenAuth(user, tokenFound));
+      // console.log('timesByPage | userFound: ', userFound);
+
+      if (userFound === undefined) {
+        res.status(401).jsonp({
+          message: 'token de autenticação inválida',
+        });
+      } else {
+        const timesFromUser = (database.times).filter(
+          (timeLoop) => auth.filterItemsFromUser(timeLoop, userFound.id),
+        );
+        console.log('timesByPage | timesFromUser: ', timesFromUser);
+
+        const timesFromSkill = timesFromUser.filter(
+          (timeFromUserLoop) => queryForeignItem(
+            timeFromUserLoop,
+            'skill',
+            'id',
+            parseInt(query.skill_id, 10),
+          ),
+        );
+        console.log('timesByPage | timesFromSkill: ', timesFromSkill);
+
+        const timesByDateRange = timesFromSkill.filter(
+          (timeFromSkillLoop) => queryByDateRange(timeFromSkillLoop, 'created', query.date_initial, query.date_final),
+        );
+        console.log('timesByPage | timesByDateRange: ', timesByDateRange);
+
+        const timesOrderByDate = itemsByDateOrder(timesByDateRange, 'created');
+        console.log('timesByPage | timesOrderByDate: ', timesOrderByDate);
+
+        const response = {
+          times: timesOrderByDate,
+        };
+        // console.log('timesByPage | response: ', response);
+        res.jsonp(response);
+      }
+    } catch (error) {
+      console.log('timesByPage | error.message: ', error.message);
       res.status(500).jsonp({
         error: error.message,
       });
