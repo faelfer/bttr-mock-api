@@ -9,6 +9,47 @@ const itemsByDateOrder = require('../utils/itemsByDateOrder');
 const { queryItem } = require('../utils/ORMDatabase');
 
 module.exports = {
+  async skillsFromUser(req, res) {
+    try {
+      const { rawHeaders } = req;
+      // console.log('skillsFromUser | db.users: ', db.users);
+
+      const tokenFound = (rawHeaders).find(auth.findTokenAuthInHeader);
+      // console.log('skillsFromUser | tokenFound: ', tokenFound);
+
+      const userFound = (database.users).find((user) => auth.findUserByTokenAuth(user, tokenFound));
+      // console.log('skillsFromUser | userFound: ', userFound);
+
+      if (userFound === undefined) {
+        res.status(401).jsonp({
+          message: 'token de autenticação inválida',
+        });
+      } else {
+        const skillsFromUser = (database.skills).filter(
+          (skillLoop) => auth.filterItemsFromUser(skillLoop, userFound.id),
+        );
+
+        const skillsOrderByDate = itemsByDateOrder(skillsFromUser, 'created');
+
+        console.log(
+          'skillsFromUser | skillsOrderByDate: ',
+          skillsOrderByDate,
+        );
+
+        const response = {
+          skills: skillsOrderByDate,
+        };
+        // console.log('skillsFromUser | response: ', response);
+        res.jsonp(response);
+      }
+    } catch (error) {
+      console.log('skillsFromUser | error.message: ', error.message);
+      res.status(500).jsonp({
+        error: error.message,
+      });
+    }
+  },
+
   async skillsByPage(req, res) {
     try {
       const { query, route, rawHeaders } = req;

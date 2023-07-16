@@ -41,6 +41,7 @@ server.post('/users/redefine_password', userController.redefinePassword);
 
 server.post('/skills/create_skill', skillController.createSkill);
 server.put('/skills/update_skill_by_id/:skill_id', skillController.updateByIdSkill);
+server.get('/skills/skills_from_user', skillController.skillsFromUser);
 server.get('/skills/skills_by_page', skillController.skillsByPage);
 server.delete('/skills/delete_skill_by_id/:skill_id', skillController.deleteByIdSkill);
 server.get('/skills/skill_by_id/:skill_id', skillController.skillById);

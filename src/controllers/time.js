@@ -17,14 +17,14 @@ module.exports = {
     try {
       const { query, route, rawHeaders } = req;
       // console.log('timesByPage | route.path: ', route.path);
-      // console.log('timesByPage | query: ', query);
+      console.log('timesByPage | query: ', query);
       // console.log('timesByPage | db.users: ', db.users);
 
       const tokenFound = (rawHeaders).find(auth.findTokenAuthInHeader);
       // console.log('timesByPage | tokenFound: ', tokenFound);
 
       const userFound = (database.users).find((user) => auth.findUserByTokenAuth(user, tokenFound));
-      // console.log('timesByPage | userFound: ', userFound);
+      console.log('timesByPage | userFound: ', userFound);
 
       if (userFound === undefined) {
         res.status(401).jsonp({
@@ -34,8 +34,10 @@ module.exports = {
         const timesFromUser = (database.times).filter(
           (timeLoop) => auth.filterItemsFromUser(timeLoop, userFound.id),
         );
+        console.log('timesByPage | timesFromUser: ', timesFromUser);
 
         const timesOrderByDate = itemsByDateOrder(timesFromUser, 'created');
+        console.log('timesByPage | timesOrderByDate: ', timesOrderByDate);
 
         const amountItensByPage = 5;
         const currentPage = parseInt(query.page, 10);
@@ -160,7 +162,7 @@ module.exports = {
           const newTimeIdNumber = parseInt(newTimeId, 10);
           const newTime = {
             id: newTimeIdNumber,
-            minutes: body.minutes,
+            minutes: parseInt(body.minutes, 10),
             skill: skillFound,
             user: userFound,
             created: new Date(),
@@ -239,7 +241,7 @@ module.exports = {
           } else {
             const manipuleDatabase = database;
             const indexFromSkillFound = (manipuleDatabase.times).indexOf(timeFound);
-            manipuleDatabase.times[indexFromSkillFound].name = body.name;
+            manipuleDatabase.times[indexFromSkillFound].minutes = parseInt(body.minutes, 10);
             manipuleDatabase.times[indexFromSkillFound].skill = skillFound;
             // console.log(
             //   'updateByIdTime | manipuleDatabase.times[indexFromSkillFound]: ',
