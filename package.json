@@ -1,6 +1,6 @@
 {
   "name": "bttr-mock-api",
-  "version": "0.3.0",
+  "version": "0.3.4",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
@@ -9,7 +9,7 @@
     "lint": "yarn run eslint controllers/** utils/** server.js",
     "lint-fix": "yarn run eslint controllers/** utils/** server.js --fix",
     "package-clean": "rm -rf node_modules yarn.lock && yarn install",
-    "commit-version": "git add CHANGELOG.md package.json && git commit -m 'update CHANGELOG and number version'"
+    "commit-version": "git add package.json && git commit -m 'update number version'"
   },
   "dependencies": {
     "convert-excel-to-json": "^1.7.0",

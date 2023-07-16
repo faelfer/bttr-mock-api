@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "9191aa74-975f-4b4c-bc25-dee6183b6223",
-		"name": "Bttr  v0.3.0",
+		"name": "Bttr  v0.3.4",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "10090520"
 	},
@@ -2286,7 +2286,7 @@
 									"    const responseJson = pm.response.json();",
 									"    pm.expect(responseJson, 'response não é do tipo objeto ou está faltando alguma chave dentro do objeto').to.be.an('object').that.has.all.keys('count', 'next', 'previous', 'results');",
 									"    function checkObjectProperties(area, index, array) {",
-									"        pm.expect(area, 'não é do tipo objeto ou está faltando alguma chave dentro do objeto').to.be.an('object').to.include.all.keys('id', 'name', 'time_daily', 'time_total', 'created', 'user');",
+									"        pm.expect(area, 'não é do tipo objeto ou está faltando alguma chave dentro do objeto').to.be.an('object').to.include.all.keys('id', 'name', 'time_daily', 'created', 'user');",
 									"    }",
 									"    ",
 									"    (responseJson.results).forEach(checkObjectProperties);",
@@ -2306,7 +2306,6 @@
 									"        pm.expect(item.id, 'o valor da propriedade id não é do tipo number').to.be.a(\"number\");",
 									"        pm.expect(item.name, 'o valor da propriedade name não é do tipo string').to.be.a(\"string\");",
 									"        pm.expect(item.time_daily, 'o valor da propriedade time_daily não é do tipo number').to.be.a(\"number\");",
-									"        pm.expect(item.time_total, 'o valor da propriedade time_total não é do tipo number').to.be.a(\"number\");",
 									"        pm.expect(item.user, 'o valor da propriedade user não é do tipo object').to.be.a(\"object\");",
 									"        pm.expect(item.user.id, 'o valor da propriedade user.id não é do tipo number').to.be.a(\"number\");",
 									"        pm.expect(item.user.username, 'o valor da propriedade user.name não é do tipo string').to.be.a(\"string\");",
@@ -2522,6 +2521,248 @@
 					]
 				},
 				{
+					"name": "Skills from User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código de status da requisição é 200\", () => {",
+									"    pm.expect(pm.response.code, 'Código da requisição diferente de 200').to.eql(200);",
+									"});",
+									"",
+									"pm.test(\"Verifica as propriedades do objeto\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson, 'response não é do tipo objeto ou está faltando alguma chave dentro do objeto').to.be.an('object').that.has.all.keys('skills');",
+									"    function checkObjectProperties(area, index, array) {",
+									"        pm.expect(area, 'não é do tipo objeto ou está faltando alguma chave dentro do objeto').to.be.an('object').to.include.all.keys('id', 'name', 'time_daily', 'created', 'user');",
+									"    }",
+									"    ",
+									"    (responseJson.skills).forEach(checkObjectProperties);",
+									"});",
+									"",
+									"pm.test(\"Verifica os tipos do objeto\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson.skills, 'O valor retornado não é do tipo array').to.be.an(\"array\");",
+									"",
+									"    function checkObjectTypes(item, index, array) {",
+									"        if (index === (array.length) - 1) {",
+									"            pm.environment.set(\"SKILL_ID\", item.id);",
+									"        }",
+									"",
+									"        pm.expect(item.id, 'o valor da propriedade id não é do tipo number').to.be.a(\"number\");",
+									"        pm.expect(item.name, 'o valor da propriedade name não é do tipo string').to.be.a(\"string\");",
+									"        pm.expect(item.time_daily, 'o valor da propriedade time_daily não é do tipo number').to.be.a(\"number\");",
+									"        pm.expect(item.user, 'o valor da propriedade user não é do tipo object').to.be.a(\"object\");",
+									"        pm.expect(item.user.id, 'o valor da propriedade user.id não é do tipo number').to.be.a(\"number\");",
+									"        pm.expect(item.user.username, 'o valor da propriedade user.name não é do tipo string').to.be.a(\"string\");",
+									"    }",
+									"    (responseJson.skills).forEach(checkObjectTypes);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{TOKEN_AUTH}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/skills/skills_from_user",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"skills",
+								"skills_from_user"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "STATUS 200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/skills/skills_by_page?page=1",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"skills",
+										"skills_by_page"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "492"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1ec-Dz9h15xwgHtfKgFVhhRiY3CGJM0\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 18:46:46 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"count\": 1,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\n            \"name\": \"Directives\",\n            \"time_daily\": 415,\n            \"id\": 159232364,\n            \"time_total\": 0,\n            \"user\": {\n                \"id\": 370783636,\n                \"token\": \"Token 5fde3a1f-24e0-4076-ae84-9779fafed0c2\",\n                \"username\": \"Kaden\",\n                \"email\": \"Karlie_Gleichner@gmail.com\",\n                \"password\": \"654321\",\n                \"created\": \"2023-05-28T18:45:33.385Z\"\n            },\n            \"created\": \"2023-05-28T18:46:42.155Z\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "STATUS 401",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/skills/skills_by_page?page=1",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"skills",
+										"skills_by_page"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"34-DPb0E9ArnjVtAOdxuUt1Y39HO/s\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 18:49:40 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"token de autenticação inválida\"\n}"
+						}
+					]
+				},
+				{
 					"name": "Skill by ID",
 					"event": [
 						{
@@ -2536,7 +2777,7 @@
 									"    const responseJson = pm.response.json();",
 									"    pm.expect(responseJson, 'response não é do tipo objeto ou está faltando alguma chave dentro do objeto').to.be.an('object').that.has.all.keys('skill');",
 									"",
-									"    pm.expect(responseJson.skill, 'não é do tipo objeto ou está faltando alguma chave dentro do objeto').to.be.an('object').to.include.all.keys('id', 'name', 'time_daily', 'time_total', 'user', 'created');",
+									"    pm.expect(responseJson.skill, 'não é do tipo objeto ou está faltando alguma chave dentro do objeto').to.be.an('object').to.include.all.keys('id', 'name', 'time_daily', 'user', 'created');",
 									"});",
 									"",
 									"pm.test(\"Verifica os tipos do objeto\", () => {",
@@ -2546,7 +2787,6 @@
 									"    pm.expect(responseJson.skill.id, 'o valor da propriedade id não é do tipo number').to.be.a(\"number\");",
 									"    pm.expect(responseJson.skill.name, 'o valor da propriedade name não é do tipo string').to.be.a(\"string\");",
 									"    pm.expect(responseJson.skill.time_daily, 'o valor da propriedade time_daily não é do tipo number').to.be.a(\"number\");",
-									"    pm.expect(responseJson.skill.time_total, 'o valor da propriedade time_total não é do tipo number').to.be.a(\"number\");",
 									"    pm.expect(responseJson.skill.user, 'o valor da propriedade user não é do tipo object').to.be.a(\"object\");",
 									"    pm.expect(responseJson.skill.user.id, 'o valor da propriedade user.id não é do tipo number').to.be.a(\"number\");",
 									"    pm.expect(responseJson.skill.user.username, 'o valor da propriedade user.name não é do tipo string').to.be.a(\"string\");",
@@ -2869,7 +3109,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"{{$randomJobArea}}\",\n    \"time_daily\": {{$randomInt}},\n    \"time_total\": {{$randomInt}}\n}",
+							"raw": "{\n    \"name\": \"{{$randomJobArea}}\",\n    \"time_daily\": {{$randomInt}}\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -5028,6 +5268,264 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"message\": \"tempo não foi encontrado.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Times by Date Range",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código de status da requisição é 200\", () => {",
+									"    pm.expect(pm.response.code, 'Código da requisição diferente de 200').to.eql(200);",
+									"});",
+									"",
+									"pm.test(\"Verifica as propriedades do objeto\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson, 'response não é do tipo objeto ou está faltando alguma chave dentro do objeto').to.be.an('object').that.has.all.keys('times');",
+									"    function checkObjectProperties(area, index, array) {",
+									"        pm.expect(area, 'não é do tipo objeto ou está faltando alguma chave dentro do objeto').to.be.an('object').to.include.all.keys('id', 'minutes', 'skill', 'user', 'created');",
+									"    }",
+									"    ",
+									"    (responseJson.times).forEach(checkObjectProperties);",
+									"});",
+									"",
+									"pm.test(\"Verifica os tipos do objeto\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson, 'O valor retornado não é do tipo object').to.be.an(\"object\");",
+									"    pm.expect(responseJson.times, 'O valor retornado não é do tipo array').to.be.an(\"array\");",
+									"",
+									"    function checkObjectTypes(item, index, array) {",
+									"        if (index === (array.length) - 1) {",
+									"            pm.environment.set(\"TIME_ID\", item.id);",
+									"        }",
+									"",
+									"        pm.expect(item.id, 'o valor da propriedade id não é do tipo number').to.be.a(\"number\");",
+									"        pm.expect(item.minutes, 'o valor da propriedade minutes não é do tipo number').to.be.a(\"number\");",
+									"        pm.expect(item.skill, 'o valor da propriedade skill não é do tipo object').to.be.a(\"object\");",
+									"        pm.expect(item.skill.id, 'o valor da propriedade skill.id não é do tipo number').to.be.a(\"number\");",
+									"        pm.expect(item.skill.name, 'o valor da propriedade skill.name não é do tipo string').to.be.a(\"string\");",
+									"        pm.expect(item.user, 'o valor da propriedade user não é do tipo object').to.be.a(\"object\");",
+									"        pm.expect(item.user.id, 'o valor da propriedade user.id não é do tipo number').to.be.a(\"number\");",
+									"        pm.expect(item.user.username, 'o valor da propriedade user.username não é do tipo string').to.be.a(\"string\");",
+									"    }",
+									"    (responseJson.times).forEach(checkObjectTypes);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{TOKEN_AUTH}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/times/times_by_date?date_initial=1&date_final&skill_id",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"times",
+								"times_by_date"
+							],
+							"query": [
+								{
+									"key": "date_initial",
+									"value": "1"
+								},
+								{
+									"key": "date_final",
+									"value": null
+								},
+								{
+									"key": "skill_id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "STATUS 200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/times/times_by_page?page=1",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"times",
+										"times_by_page"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "888"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"378-hVi+nAx86uFRuuCJVfEkybyrDAg\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 20:23:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"count\": 1,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\n            \"id\": 956839455,\n            \"minutes\": 216,\n            \"skill\": {\n                \"name\": \"Creative\",\n                \"time_daily\": 853,\n                \"id\": 897435466,\n                \"time_total\": 0,\n                \"user\": {\n                    \"id\": 916400018,\n                    \"token\": \"Token c9855e61-00a6-4a44-83f8-67b379e4fe79\",\n                    \"username\": \"Katherine\",\n                    \"email\": \"Bailee30@gmail.com\",\n                    \"password\": \"654321\",\n                    \"created\": \"2023-05-28T19:58:41.204Z\"\n                },\n                \"created\": \"2023-05-28T19:58:54.501Z\"\n            },\n            \"user\": {\n                \"id\": 916400018,\n                \"token\": \"Token c9855e61-00a6-4a44-83f8-67b379e4fe79\",\n                \"username\": \"Katherine\",\n                \"email\": \"Bailee30@gmail.com\",\n                \"password\": \"654321\",\n                \"created\": \"2023-05-28T19:58:41.204Z\"\n            },\n            \"created\": \"2023-05-28T19:59:03.555Z\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "STATUS 401",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/times/times_by_page?page=1",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"times",
+										"times_by_page"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"34-DPb0E9ArnjVtAOdxuUt1Y39HO/s\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 20:24:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"token de autenticação inválida\"\n}"
 						}
 					]
 				}
