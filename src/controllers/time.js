@@ -160,9 +160,10 @@ module.exports = {
         } else {
           const newTimeId = faker.random.numeric(9);
           const newTimeIdNumber = parseInt(newTimeId, 10);
+          const newTimeMinutesNumber = parseInt(body.minutes, 10);
           const newTime = {
             id: newTimeIdNumber,
-            minutes: parseInt(body.minutes, 10),
+            minutes: parseInt(newTimeMinutesNumber, 10),
             skill: skillFound,
             user: userFound,
             created: new Date(),
@@ -240,8 +241,9 @@ module.exports = {
             });
           } else {
             const manipuleDatabase = database;
+            const updateTimeMinutesNumber = parseInt(body.minutes, 10);
             const indexFromSkillFound = (manipuleDatabase.times).indexOf(timeFound);
-            manipuleDatabase.times[indexFromSkillFound].minutes = parseInt(body.minutes, 10);
+            manipuleDatabase.times[indexFromSkillFound].minutes = updateTimeMinutesNumber;
             manipuleDatabase.times[indexFromSkillFound].skill = skillFound;
             // console.log(
             //   'updateByIdTime | manipuleDatabase.times[indexFromSkillFound]: ',

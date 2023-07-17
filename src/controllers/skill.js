@@ -189,9 +189,10 @@ module.exports = {
         const newSkill = body;
         const newSkillId = faker.random.numeric(9);
         const newSkillIdNumber = parseInt(newSkillId, 10);
+        const newTimeDailyNumber = parseInt(body.time_daily, 10);
         newSkill.id = newSkillIdNumber;
         newSkill.name = body.name;
-        newSkill.time_daily = body.time_daily;
+        newSkill.time_daily = parseInt(newTimeDailyNumber, 10);
         newSkill.user = userFound;
         newSkill.created = new Date();
         // console.log('createSkill | newSkill: ', newSkill);
@@ -248,9 +249,10 @@ module.exports = {
           });
         } else {
           const manipuleDatabase = database;
+          const updateTimeDailyNumber = parseInt(body.time_daily, 10);
           const indexFromSkillFound = (manipuleDatabase.skills).indexOf(skillFound);
           manipuleDatabase.skills[indexFromSkillFound].name = body.name;
-          manipuleDatabase.skills[indexFromSkillFound].time_daily = body.time_daily;
+          manipuleDatabase.skills[indexFromSkillFound].time_daily = updateTimeDailyNumber;
           // console.log(
           //   'updateByIdSkill | manipuleDatabase.skills[indexFromSkillFound]: ',
           //   manipuleDatabase.skills[indexFromSkillFound],

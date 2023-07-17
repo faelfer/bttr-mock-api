@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "9191aa74-975f-4b4c-bc25-dee6183b6223",
-		"name": "Bttr  v0.3.4",
+		"name": "Bttr  v0.3.6",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "10090520"
 	},
@@ -2602,19 +2602,13 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{API_URL}}/skills/skills_by_page?page=1",
+									"raw": "{{API_URL}}/skills/skills_from_user",
 									"host": [
 										"{{API_URL}}"
 									],
 									"path": [
 										"skills",
-										"skills_by_page"
-									],
-									"query": [
-										{
-											"key": "page",
-											"value": "1"
-										}
+										"skills_from_user"
 									]
 								}
 							},
@@ -2655,16 +2649,16 @@
 									"value": "application/json; charset=utf-8"
 								},
 								{
-									"key": "Content-Length",
-									"value": "492"
+									"key": "ETag",
+									"value": "W/\"7ad-7cgba70wRMLTE6LrdZ/7sykF79c\""
 								},
 								{
-									"key": "ETag",
-									"value": "W/\"1ec-Dz9h15xwgHtfKgFVhhRiY3CGJM0\""
+									"key": "Content-Encoding",
+									"value": "gzip"
 								},
 								{
 									"key": "Date",
-									"value": "Sun, 28 May 2023 18:46:46 GMT"
+									"value": "Mon, 17 Jul 2023 17:29:24 GMT"
 								},
 								{
 									"key": "Connection",
@@ -2673,10 +2667,14 @@
 								{
 									"key": "Keep-Alive",
 									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"count\": 1,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\n            \"name\": \"Directives\",\n            \"time_daily\": 415,\n            \"id\": 159232364,\n            \"time_total\": 0,\n            \"user\": {\n                \"id\": 370783636,\n                \"token\": \"Token 5fde3a1f-24e0-4076-ae84-9779fafed0c2\",\n                \"username\": \"Kaden\",\n                \"email\": \"Karlie_Gleichner@gmail.com\",\n                \"password\": \"654321\",\n                \"created\": \"2023-05-28T18:45:33.385Z\"\n            },\n            \"created\": \"2023-05-28T18:46:42.155Z\"\n        }\n    ]\n}"
+							"body": "{\n    \"skills\": [\n        {\n            \"name\": \"texto\",\n            \"time_daily\": 30,\n            \"id\": 384588989,\n            \"user\": {\n                \"id\": 881309181,\n                \"token\": \"Token 29f59b35-9524-42a8-a262-a50f91e66a99\",\n                \"username\": \"Rafael\",\n                \"email\": \"rfapp00@gmail.com\",\n                \"password\": \"!Acd1234\",\n                \"created\": \"2023-07-15T19:29:53.869Z\"\n            },\n            \"created\": \"2023-07-16T22:33:04.606Z\"\n        },\n        {\n            \"name\": \"estudo\",\n            \"time_daily\": 150,\n            \"id\": 997116982,\n            \"user\": {\n                \"id\": 881309181,\n                \"token\": \"Token 29f59b35-9524-42a8-a262-a50f91e66a99\",\n                \"username\": \"Rafael\",\n                \"email\": \"rfapp00@gmail.com\",\n                \"password\": \"!Acd1234\",\n                \"created\": \"2023-07-15T19:29:53.869Z\"\n            },\n            \"created\": \"2023-07-15T19:35:30.514Z\"\n        },\n        {\n            \"name\": \"desenvolvimento\",\n            \"time_daily\": 100,\n            \"id\": 573231615,\n            \"user\": {\n                \"id\": 881309181,\n                \"token\": \"Token 29f59b35-9524-42a8-a262-a50f91e66a99\",\n                \"username\": \"Rafael\",\n                \"email\": \"rfapp00@gmail.com\",\n                \"password\": \"!Acd1234\",\n                \"created\": \"2023-07-15T19:29:53.869Z\"\n            },\n            \"created\": \"2023-07-15T19:33:34.650Z\"\n        },\n        {\n            \"name\": \"desenho\",\n            \"time_daily\": 25,\n            \"id\": 778895139,\n            \"user\": {\n                \"id\": 881309181,\n                \"token\": \"Token 29f59b35-9524-42a8-a262-a50f91e66a99\",\n                \"username\": \"Rafael\",\n                \"email\": \"rfapp00@gmail.com\",\n                \"password\": \"!Acd1234\",\n                \"created\": \"2023-07-15T19:29:53.869Z\"\n            },\n            \"created\": \"2023-07-15T19:32:04.484Z\"\n        },\n        {\n            \"name\": \"livro\",\n            \"time_daily\": 25,\n            \"id\": 454374438,\n            \"user\": {\n                \"id\": 881309181,\n                \"token\": \"Token 29f59b35-9524-42a8-a262-a50f91e66a99\",\n                \"username\": \"Rafael\",\n                \"email\": \"rfapp00@gmail.com\",\n                \"password\": \"!Acd1234\",\n                \"created\": \"2023-07-15T19:29:53.869Z\"\n            },\n            \"created\": \"2023-07-15T19:31:38.063Z\"\n        }\n    ]\n}"
 						},
 						{
 							"name": "STATUS 401",
@@ -2684,19 +2682,13 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{API_URL}}/skills/skills_by_page?page=1",
+									"raw": "{{API_URL}}/skills/skills_from_user",
 									"host": [
 										"{{API_URL}}"
 									],
 									"path": [
 										"skills",
-										"skills_by_page"
-									],
-									"query": [
-										{
-											"key": "page",
-											"value": "1"
-										}
+										"skills_from_user"
 									]
 								}
 							},
@@ -2746,7 +2738,7 @@
 								},
 								{
 									"key": "Date",
-									"value": "Sun, 28 May 2023 18:49:40 GMT"
+									"value": "Mon, 17 Jul 2023 17:30:52 GMT"
 								},
 								{
 									"key": "Connection",
@@ -5338,7 +5330,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API_URL}}/times/times_by_date?date_initial=1&date_final&skill_id",
+							"raw": "{{API_URL}}/times/times_by_date?date_initial=2023-07-01T19:29:53.869Z&date_final=2023-07-31T19:29:53.869Z&skill_id={{SKILL_ID}}",
 							"host": [
 								"{{API_URL}}"
 							],
@@ -5349,15 +5341,15 @@
 							"query": [
 								{
 									"key": "date_initial",
-									"value": "1"
+									"value": "2023-07-01T19:29:53.869Z"
 								},
 								{
 									"key": "date_final",
-									"value": null
+									"value": "2023-07-31T19:29:53.869Z"
 								},
 								{
 									"key": "skill_id",
-									"value": null
+									"value": "{{SKILL_ID}}"
 								}
 							]
 						}
@@ -5369,18 +5361,26 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{API_URL}}/times/times_by_page?page=1",
+									"raw": "{{API_URL}}/times/times_by_date?date_initial=2023-07-01T19:29:53.869Z&date_final=2023-07-31T19:29:53.869Z&skill_id={{SKILL_ID}}",
 									"host": [
 										"{{API_URL}}"
 									],
 									"path": [
 										"times",
-										"times_by_page"
+										"times_by_date"
 									],
 									"query": [
 										{
-											"key": "page",
-											"value": "1"
+											"key": "date_initial",
+											"value": "2023-07-01T19:29:53.869Z"
+										},
+										{
+											"key": "date_final",
+											"value": "2023-07-31T19:29:53.869Z"
+										},
+										{
+											"key": "skill_id",
+											"value": "{{SKILL_ID}}"
 										}
 									]
 								}
@@ -5422,16 +5422,16 @@
 									"value": "application/json; charset=utf-8"
 								},
 								{
-									"key": "Content-Length",
-									"value": "888"
+									"key": "ETag",
+									"value": "W/\"947-dF8B2DDGEtIXec3UJUDl3WCoNHI\""
 								},
 								{
-									"key": "ETag",
-									"value": "W/\"378-hVi+nAx86uFRuuCJVfEkybyrDAg\""
+									"key": "Content-Encoding",
+									"value": "gzip"
 								},
 								{
 									"key": "Date",
-									"value": "Sun, 28 May 2023 20:23:53 GMT"
+									"value": "Mon, 17 Jul 2023 17:34:23 GMT"
 								},
 								{
 									"key": "Connection",
@@ -5440,10 +5440,14 @@
 								{
 									"key": "Keep-Alive",
 									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"count\": 1,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\n            \"id\": 956839455,\n            \"minutes\": 216,\n            \"skill\": {\n                \"name\": \"Creative\",\n                \"time_daily\": 853,\n                \"id\": 897435466,\n                \"time_total\": 0,\n                \"user\": {\n                    \"id\": 916400018,\n                    \"token\": \"Token c9855e61-00a6-4a44-83f8-67b379e4fe79\",\n                    \"username\": \"Katherine\",\n                    \"email\": \"Bailee30@gmail.com\",\n                    \"password\": \"654321\",\n                    \"created\": \"2023-05-28T19:58:41.204Z\"\n                },\n                \"created\": \"2023-05-28T19:58:54.501Z\"\n            },\n            \"user\": {\n                \"id\": 916400018,\n                \"token\": \"Token c9855e61-00a6-4a44-83f8-67b379e4fe79\",\n                \"username\": \"Katherine\",\n                \"email\": \"Bailee30@gmail.com\",\n                \"password\": \"654321\",\n                \"created\": \"2023-05-28T19:58:41.204Z\"\n            },\n            \"created\": \"2023-05-28T19:59:03.555Z\"\n        }\n    ]\n}"
+							"body": "{\n    \"times\": [\n        {\n            \"id\": 672936087,\n            \"minutes\": 24,\n            \"skill\": {\n                \"name\": \"livro\",\n                \"time_daily\": \"25\",\n                \"id\": 454374438,\n                \"user\": {\n                    \"id\": 881309181,\n                    \"token\": \"Token 29f59b35-9524-42a8-a262-a50f91e66a99\",\n                    \"username\": \"Rafael\",\n                    \"email\": \"rfapp00@gmail.com\",\n                    \"password\": \"!Acd1234\",\n                    \"created\": \"2023-07-15T19:29:53.869Z\"\n                },\n                \"created\": \"2023-07-15T19:31:38.063Z\"\n            },\n            \"user\": {\n                \"id\": 881309181,\n                \"token\": \"Token 29f59b35-9524-42a8-a262-a50f91e66a99\",\n                \"username\": \"Rafael\",\n                \"email\": \"rfapp00@gmail.com\",\n                \"password\": \"!Acd1234\",\n                \"created\": \"2023-07-15T19:29:53.869Z\"\n            },\n            \"created\": \"2023-07-16T14:52:18.853Z\"\n        },\n        {\n            \"id\": 374764867,\n            \"minutes\": 27,\n            \"skill\": {\n                \"name\": \"livro\",\n                \"time_daily\": \"25\",\n                \"id\": 454374438,\n                \"user\": {\n                    \"id\": 881309181,\n                    \"token\": \"Token 29f59b35-9524-42a8-a262-a50f91e66a99\",\n                    \"username\": \"Rafael\",\n                    \"email\": \"rfapp00@gmail.com\",\n                    \"password\": \"!Acd1234\",\n                    \"created\": \"2023-07-15T19:29:53.869Z\"\n                },\n                \"created\": \"2023-07-15T19:31:38.063Z\"\n            },\n            \"user\": {\n                \"id\": 881309181,\n                \"token\": \"Token 29f59b35-9524-42a8-a262-a50f91e66a99\",\n                \"username\": \"Rafael\",\n                \"email\": \"rfapp00@gmail.com\",\n                \"password\": \"!Acd1234\",\n                \"created\": \"2023-07-15T19:29:53.869Z\"\n            },\n            \"created\": \"2023-07-16T13:17:52.932Z\"\n        },\n        {\n            \"id\": 393266886,\n            \"minutes\": 200,\n            \"skill\": {\n                \"name\": \"livro\",\n                \"time_daily\": \"25\",\n                \"id\": 454374438,\n                \"user\": {\n                    \"id\": 881309181,\n                    \"token\": \"Token 29f59b35-9524-42a8-a262-a50f91e66a99\",\n                    \"username\": \"Rafael\",\n                    \"email\": \"rfapp00@gmail.com\",\n                    \"password\": \"!Acd1234\",\n                    \"created\": \"2023-07-15T19:29:53.869Z\"\n                },\n                \"created\": \"2023-07-15T19:31:38.063Z\"\n            },\n            \"user\": {\n                \"id\": 881309181,\n                \"token\": \"Token 29f59b35-9524-42a8-a262-a50f91e66a99\",\n                \"username\": \"Rafael\",\n                \"email\": \"rfapp00@gmail.com\",\n                \"password\": \"!Acd1234\",\n                \"created\": \"2023-07-15T19:29:53.869Z\"\n            },\n            \"created\": \"2023-07-15T23:50:38.385Z\"\n        }\n    ]\n}"
 						},
 						{
 							"name": "STATUS 401",
@@ -5451,18 +5455,26 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{API_URL}}/times/times_by_page?page=1",
+									"raw": "{{API_URL}}/times/times_by_date?date_initial=2023-07-01T19:29:53.869Z&date_final=2023-07-31T19:29:53.869Z&skill_id={{SKILL_ID}}",
 									"host": [
 										"{{API_URL}}"
 									],
 									"path": [
 										"times",
-										"times_by_page"
+										"times_by_date"
 									],
 									"query": [
 										{
-											"key": "page",
-											"value": "1"
+											"key": "date_initial",
+											"value": "2023-07-01T19:29:53.869Z"
+										},
+										{
+											"key": "date_final",
+											"value": "2023-07-31T19:29:53.869Z"
+										},
+										{
+											"key": "skill_id",
+											"value": "{{SKILL_ID}}"
 										}
 									]
 								}
@@ -5513,7 +5525,7 @@
 								},
 								{
 									"key": "Date",
-									"value": "Sun, 28 May 2023 20:24:12 GMT"
+									"value": "Mon, 17 Jul 2023 17:37:02 GMT"
 								},
 								{
 									"key": "Connection",
