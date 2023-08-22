@@ -30,11 +30,10 @@ module.exports = {
         );
 
         const skillsOrderByDate = itemsByDateOrder(skillsFromUser, 'created');
-
-        console.log(
-          'skillsFromUser | skillsOrderByDate: ',
-          skillsOrderByDate,
-        );
+        // console.log(
+        //   'skillsFromUser | skillsOrderByDate: ',
+        //   skillsOrderByDate,
+        // );
 
         const response = {
           skills: skillsOrderByDate,
@@ -113,14 +112,14 @@ module.exports = {
   async skillById(req, res) {
     try {
       const { params, rawHeaders } = req;
-      console.log('skillById | params: ', params);
-      console.log('skillById | rawHeaders: ', rawHeaders);
+      // console.log('skillById | params: ', params);
+      // console.log('skillById | rawHeaders: ', rawHeaders);
       // console.log('skillById | db.users: ', db.users);
 
       const tokenFound = (rawHeaders).find(auth.findTokenAuthInHeader);
 
       const userFound = (database.users).find((user) => auth.findUserByTokenAuth(user, tokenFound));
-      console.log('skillById | userFound: ', userFound);
+      // console.log('skillById | userFound: ', userFound);
 
       if (userFound === undefined) {
         res.status(401).jsonp({
@@ -130,14 +129,14 @@ module.exports = {
         const skillsFromUser = (database.skills).filter(
           (skillLoop) => auth.filterItemsFromUser(skillLoop, userFound.id),
         );
-        console.log('skillById | skillsFromUser: ', skillsFromUser);
+        // console.log('skillById | skillsFromUser: ', skillsFromUser);
 
         const skillFound = skillsFromUser.find((skillCycle) => queryItem(
           skillCycle,
           'id',
           parseInt(params.skill_id, 10),
         ));
-        console.log('skillById | skillFound: ', skillFound);
+        // console.log('skillById | skillFound: ', skillFound);
 
         if (skillFound === undefined) {
           res.status(404).jsonp({
@@ -201,7 +200,7 @@ module.exports = {
         // console.log('createSkill | manipuleDatabase.skills: ', manipuleDatabase.skills);
         writeDatabase(manipuleDatabase);
         res.jsonp({
-          message: 'habilitade foi criada com sucesso.',
+          message: 'habilidade foi criada com sucesso.',
         });
       }
     } catch (error) {
@@ -224,7 +223,7 @@ module.exports = {
       const tokenFound = (rawHeaders).find(auth.findTokenAuthInHeader);
 
       const userFound = (database.users).find((user) => auth.findUserByTokenAuth(user, tokenFound));
-      console.log('updateByIdSkill | userFound: ', userFound);
+      // console.log('updateByIdSkill | userFound: ', userFound);
 
       if (userFound === undefined) {
         res.status(401).jsonp({
@@ -234,14 +233,14 @@ module.exports = {
         const skillsFromUser = (database.skills).filter(
           (skillLoop) => auth.filterItemsFromUser(skillLoop, userFound.id),
         );
-        console.log('updateByIdSkill | skillsFromUser: ', skillsFromUser);
+        // console.log('updateByIdSkill | skillsFromUser: ', skillsFromUser);
 
         const skillFound = skillsFromUser.find((skillCycle) => queryItem(
           skillCycle,
           'id',
           parseInt(params.skill_id, 10),
         ));
-        console.log('updateByIdSkill | skillFound: ', skillFound);
+        // console.log('updateByIdSkill | skillFound: ', skillFound);
 
         if (skillFound === undefined) {
           res.status(404).jsonp({
@@ -292,7 +291,7 @@ module.exports = {
         const skillsFromUser = (database.skills).filter(
           (skillLoop) => auth.filterItemsFromUser(skillLoop, userFound.id),
         );
-        console.log('deleteByIdSkill | skillsFromUser: ', skillsFromUser);
+        // console.log('deleteByIdSkill | skillsFromUser: ', skillsFromUser);
 
         const skillFound = skillsFromUser.find((timeCycle) => queryItem(
           timeCycle,

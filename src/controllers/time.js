@@ -17,14 +17,14 @@ module.exports = {
     try {
       const { query, route, rawHeaders } = req;
       // console.log('timesByPage | route.path: ', route.path);
-      console.log('timesByPage | query: ', query);
+      // console.log('timesByPage | query: ', query);
       // console.log('timesByPage | db.users: ', db.users);
 
       const tokenFound = (rawHeaders).find(auth.findTokenAuthInHeader);
       // console.log('timesByPage | tokenFound: ', tokenFound);
 
       const userFound = (database.users).find((user) => auth.findUserByTokenAuth(user, tokenFound));
-      console.log('timesByPage | userFound: ', userFound);
+      // console.log('timesByPage | userFound: ', userFound);
 
       if (userFound === undefined) {
         res.status(401).jsonp({
@@ -34,10 +34,10 @@ module.exports = {
         const timesFromUser = (database.times).filter(
           (timeLoop) => auth.filterItemsFromUser(timeLoop, userFound.id),
         );
-        console.log('timesByPage | timesFromUser: ', timesFromUser);
+        // console.log('timesByPage | timesFromUser: ', timesFromUser);
 
         const timesOrderByDate = itemsByDateOrder(timesFromUser, 'created');
-        console.log('timesByPage | timesOrderByDate: ', timesOrderByDate);
+        // console.log('timesByPage | timesOrderByDate: ', timesOrderByDate);
 
         const amountItensByPage = 5;
         const currentPage = parseInt(query.page, 10);
@@ -78,14 +78,14 @@ module.exports = {
   async timeById(req, res) {
     try {
       const { params, rawHeaders } = req;
-      console.log('timeById | params: ', params);
-      console.log('timeById | rawHeaders: ', rawHeaders);
+      // console.log('timeById | params: ', params);
+      // console.log('timeById | rawHeaders: ', rawHeaders);
       // console.log('timeById | db.users: ', db.users);
 
       const tokenFound = (rawHeaders).find(auth.findTokenAuthInHeader);
 
       const userFound = (database.users).find((user) => auth.findUserByTokenAuth(user, tokenFound));
-      console.log('timeById | userFound: ', userFound);
+      // console.log('timeById | userFound: ', userFound);
 
       if (userFound === undefined) {
         res.status(401).jsonp({
@@ -95,14 +95,14 @@ module.exports = {
         const timesFromUser = (database.times).filter(
           (timeLoop) => auth.filterItemsFromUser(timeLoop, userFound.id),
         );
-        console.log('timeById | timesFromUser: ', timesFromUser);
+        // console.log('timeById | timesFromUser: ', timesFromUser);
 
         const timeFound = timesFromUser.find((timeCycle) => queryItem(
           timeCycle,
           'id',
           parseInt(params.time_id, 10),
         ));
-        console.log('timeById | timeFound: ', timeFound);
+        // console.log('timeById | timeFound: ', timeFound);
 
         if (timeFound === undefined) {
           res.status(404).jsonp({
@@ -199,7 +199,7 @@ module.exports = {
       const tokenFound = (rawHeaders).find(auth.findTokenAuthInHeader);
 
       const userFound = (database.users).find((user) => auth.findUserByTokenAuth(user, tokenFound));
-      console.log('updateByIdTime | userFound: ', userFound);
+      // console.log('updateByIdTime | userFound: ', userFound);
 
       if (userFound === undefined) {
         res.status(401).jsonp({
@@ -209,14 +209,14 @@ module.exports = {
         const timesFromUser = (database.times).filter(
           (timeLoop) => auth.filterItemsFromUser(timeLoop, userFound.id),
         );
-        console.log('updateByIdTime | timesFromUser: ', timesFromUser);
+        // console.log('updateByIdTime | timesFromUser: ', timesFromUser);
 
         const timeFound = timesFromUser.find((timeCycle) => queryItem(
           timeCycle,
           'id',
           parseInt(params.time_id, 10),
         ));
-        console.log('updateByIdTime | timeFound: ', timeFound);
+        // console.log('updateByIdTime | timeFound: ', timeFound);
 
         if (timeFound === undefined) {
           res.status(404).jsonp({
@@ -226,14 +226,14 @@ module.exports = {
           const skillsFromUser = (database.skills).filter(
             (skillLoop) => auth.filterItemsFromUser(skillLoop, userFound.id),
           );
-          console.log('updateByIdTime | skillsFromUser: ', skillsFromUser);
+          // console.log('updateByIdTime | skillsFromUser: ', skillsFromUser);
 
           const skillFound = skillsFromUser.find((skillCycle) => queryItem(
             skillCycle,
             'id',
             parseInt(body.skill_id, 10),
           ));
-          console.log('updateByIdTime | skillFound: ', skillFound);
+          // console.log('updateByIdTime | skillFound: ', skillFound);
 
           if (skillFound === undefined) {
             res.status(404).jsonp({
@@ -285,7 +285,7 @@ module.exports = {
         const timesFromUser = (database.times).filter(
           (timeLoop) => auth.filterItemsFromUser(timeLoop, userFound.id),
         );
-        console.log('deleteByIdTime | timesFromUser: ', timesFromUser);
+        // console.log('deleteByIdTime | timesFromUser: ', timesFromUser);
 
         const timeFound = timesFromUser.find((timeCycle) => queryItem(
           timeCycle,
@@ -337,7 +337,7 @@ module.exports = {
         const timesFromUser = (database.times).filter(
           (timeLoop) => auth.filterItemsFromUser(timeLoop, userFound.id),
         );
-        console.log('timesByPage | timesFromUser: ', timesFromUser);
+        // console.log('timesByPage | timesFromUser: ', timesFromUser);
 
         const timesFromSkill = timesFromUser.filter(
           (timeFromUserLoop) => queryForeignItem(
@@ -347,15 +347,15 @@ module.exports = {
             parseInt(query.skill_id, 10),
           ),
         );
-        console.log('timesByPage | timesFromSkill: ', timesFromSkill);
+        // console.log('timesByPage | timesFromSkill: ', timesFromSkill);
 
         const timesByDateRange = timesFromSkill.filter(
           (timeFromSkillLoop) => queryByDateRange(timeFromSkillLoop, 'created', query.date_initial, query.date_final),
         );
-        console.log('timesByPage | timesByDateRange: ', timesByDateRange);
+        // console.log('timesByPage | timesByDateRange: ', timesByDateRange);
 
         const timesOrderByDate = itemsByDateOrder(timesByDateRange, 'created');
-        console.log('timesByPage | timesOrderByDate: ', timesOrderByDate);
+        // console.log('timesByPage | timesOrderByDate: ', timesOrderByDate);
 
         const response = {
           times: timesOrderByDate,

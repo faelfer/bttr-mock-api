@@ -12,7 +12,7 @@ module.exports = {
     try {
       const { body } = req;
 
-      console.log('signUp | body: ', body);
+      // console.log('signUp | body: ', body);
       // console.log('signUp | database.users: ', database.users);
 
       const emailFound = (database.users).find((userLoop) => queryItem(
