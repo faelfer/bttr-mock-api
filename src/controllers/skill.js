@@ -159,16 +159,15 @@ module.exports = {
   async createSkill(req, res) {
     try {
       const { body, rawHeaders } = req;
-
-      // console.log('createSkill | rawHeaders: ', rawHeaders);
-      // console.log('createSkill | body: ', body);
+      console.log('createSkill | rawHeaders: ', rawHeaders);
+      console.log('createSkill | body: ', body);
       // console.log('createSkill | database.users: ', database.users);
 
       const tokenFound = (rawHeaders).find(auth.findTokenAuthInHeader);
-      // console.log('createSkill | tokenFound: ', tokenFound);
+      console.log('createSkill | tokenFound: ', tokenFound);
 
       const userFound = (database.users).find((user) => auth.findUserByTokenAuth(user, tokenFound));
-      // console.log('createSkill | userFound: ', userFound);
+      console.log('createSkill | userFound: ', userFound);
 
       const skillNameFound = (database.skills).find((skillCycle) => queryItem(
         skillCycle,
@@ -188,10 +187,10 @@ module.exports = {
         const newSkill = body;
         const newSkillId = faker.random.numeric(9);
         const newSkillIdNumber = parseInt(newSkillId, 10);
-        const newTimeDailyNumber = parseInt(body.time_daily, 10);
+        const newTimeDailyNumber = parseInt(body.daily, 10);
         newSkill.id = newSkillIdNumber;
         newSkill.name = body.name;
-        newSkill.time_daily = parseInt(newTimeDailyNumber, 10);
+        newSkill.daily = parseInt(newTimeDailyNumber, 10);
         newSkill.user = userFound;
         newSkill.created = new Date();
         // console.log('createSkill | newSkill: ', newSkill);
@@ -248,10 +247,10 @@ module.exports = {
           });
         } else {
           const manipuleDatabase = database;
-          const updateTimeDailyNumber = parseInt(body.time_daily, 10);
+          const updateTimeDailyNumber = parseInt(body.daily, 10);
           const indexFromSkillFound = (manipuleDatabase.skills).indexOf(skillFound);
           manipuleDatabase.skills[indexFromSkillFound].name = body.name;
-          manipuleDatabase.skills[indexFromSkillFound].time_daily = updateTimeDailyNumber;
+          manipuleDatabase.skills[indexFromSkillFound].daily = updateTimeDailyNumber;
           // console.log(
           //   'updateByIdSkill | manipuleDatabase.skills[indexFromSkillFound]: ',
           //   manipuleDatabase.skills[indexFromSkillFound],
