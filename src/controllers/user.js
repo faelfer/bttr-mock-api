@@ -130,7 +130,7 @@ module.exports = {
         manipuleDatabase.users[indexFromUserFound].password = passwordTemporary;
         writeDatabase(manipuleDatabase);
         res.jsonp({
-          message: 'senha temporária enviada',
+          message: 'senha temporária enviada.',
         });
       }
     } catch (error) {
